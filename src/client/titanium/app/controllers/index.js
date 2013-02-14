@@ -103,4 +103,3 @@ $.ds.tableView.addEventListener('click', function selectRow(e) {
 	// }
 	$.ds.toggleSlider();
 });
-

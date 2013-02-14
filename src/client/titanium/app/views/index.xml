@@ -1,5 +1,10 @@
 <Alloy>
+<<<<<<< HEAD
 	<Window id="win">
 		<Require type="widget" src="ds.slideMenu" id="ds"/>
+=======
+	<Window class="container">
+		<Label id="label" onClick="doClick">Hello, World</Label>
+>>>>>>> master
 	</Window>
 </Alloy>
