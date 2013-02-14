@@ -1,0 +1,121 @@
+.
+├── CHANGELOG.txt
+├── LICENSE
+├── LICENSE.txt
+├── README
+├── README.md
+├── Resources
+│   ├── KS_nav_ui.png
+│   ├── KS_nav_views.png
+│   ├── android
+│   │   ├── appicon.png
+│   │   ├── default.png
+│   │   └── images
+│   │       ├── res-long-land-hdpi
+│   │       │   └── default.png
+│   │       ├── res-long-land-ldpi
+│   │       │   └── default.png
+│   │       ├── res-long-port-hdpi
+│   │       │   └── default.png
+│   │       ├── res-long-port-ldpi
+│   │       │   └── default.png
+│   │       ├── res-notlong-land-hdpi
+│   │       │   └── default.png
+│   │       ├── res-notlong-land-ldpi
+│   │       │   └── default.png
+│   │       ├── res-notlong-land-mdpi
+│   │       │   └── default.png
+│   │       ├── res-notlong-port-hdpi
+│   │       │   └── default.png
+│   │       ├── res-notlong-port-ldpi
+│   │       │   └── default.png
+│   │       └── res-notlong-port-mdpi
+│   │           └── default.png
+│   ├── app.js
+│   └── iphone
+│       ├── Default-568h@2x.png
+│       ├── Default-Landscape.png
+│       ├── Default-Portrait.png
+│       ├── Default.png
+│       ├── Default@2x.png
+│       └── appicon.png
+├── app
+│   ├── README
+│   ├── alloy.js
+│   ├── assets
+│   │   ├── android
+│   │   │   ├── MarketplaceArtwork.png
+│   │   │   ├── appicon.png
+│   │   │   ├── default.png
+│   │   │   └── images
+│   │   │       ├── res-long-land-hdpi
+│   │   │       │   └── default.png
+│   │   │       ├── res-long-land-ldpi
+│   │   │       │   └── default.png
+│   │   │       ├── res-long-port-hdpi
+│   │   │       │   └── default.png
+│   │   │       ├── res-long-port-ldpi
+│   │   │       │   └── default.png
+│   │   │       ├── res-notlong-land-hdpi
+│   │   │       │   └── default.png
+│   │   │       ├── res-notlong-land-ldpi
+│   │   │       │   └── default.png
+│   │   │       ├── res-notlong-land-mdpi
+│   │   │       │   └── default.png
+│   │   │       ├── res-notlong-port-hdpi
+│   │   │       │   └── default.png
+│   │   │       ├── res-notlong-port-ldpi
+│   │   │       │   └── default.png
+│   │   │       └── res-notlong-port-mdpi
+│   │   │           └── default.png
+│   │   ├── iphone
+│   │   │   ├── Default-568h@2x.png
+│   │   │   ├── Default-Landscape.png
+│   │   │   ├── Default-Landscape@2x.png
+│   │   │   ├── Default-Portrait.png
+│   │   │   ├── Default-Portrait@2x.png
+│   │   │   ├── Default.png
+│   │   │   ├── Default@2x.png
+│   │   │   ├── Icon-Small-50.png
+│   │   │   ├── Icon-Small.png
+│   │   │   ├── Icon-Small@2x.png
+│   │   │   ├── appicon-72.png
+│   │   │   ├── appicon-72@2x.png
+│   │   │   ├── appicon.png
+│   │   │   ├── appicon@2x.png
+│   │   │   └── iTunesArtwork
+│   │   └── mobileweb
+│   │       ├── appicon.png
+│   │       ├── apple_startup_images
+│   │       │   ├── Default-Landscape.jpg
+│   │       │   ├── Default-Landscape.png
+│   │       │   ├── Default-Portrait.jpg
+│   │       │   ├── Default-Portrait.png
+│   │       │   ├── Default.jpg
+│   │       │   ├── Default.png
+│   │       │   └── README
+│   │       └── splash
+│   │           ├── README
+│   │           ├── appc.png
+│   │           ├── splash.css
+│   │           ├── splash.html
+│   │           └── titanium.png
+│   ├── config.json
+│   ├── controllers
+│   │   └── index.js
+│   ├── models
+│   ├── styles
+│   │   └── index.tss
+│   └── views
+│       └── index.xml
+├── manifest
+├── plugins
+│   └── ti.alloy
+│       ├── hooks
+│       │   └── alloy.js
+│       └── plugin.py
+├── ti.physicalSizeCategory-android-1.0.zip
+├── tiapp.xml
+└── tree.list
+
+39 directories, 79 files
