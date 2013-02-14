@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
-    <property name="acs-oauth-secret-production" type="string">o78fKedYCTtjBGLng9kjW6AVu4GQj2B2</property>
-    <property name="acs-oauth-key-production" type="string">Yj6ijTYGJJpjo9snPdhmeubWweZFT2aO</property>
-    <property name="acs-api-key-production" type="string">qbNqHXxIzuWImEHiEWcfH5Dlx4F2fkXm</property>
-    <property name="acs-oauth-secret-development" type="string">Y9nkXTB8y5DZopOpqtZCrk8XtiaBdDHk</property>
-    <property name="acs-oauth-key-development" type="string">syhRdZhWU0ZdcFiuZOsQPKrS4Ie4Qm19</property>
-    <property name="acs-api-key-development" type="string">76WdMEW6hXYAGdcFCT4DAsgCE4eYz6EV</property>
+    <property name="acs-oauth-secret-production" type="string">GzmVPzQY2dCeb0prYODLxx1ZGY4Bu9zD</property>
+    <property name="acs-oauth-key-production" type="string">Euvd3YG54A3OoYu0lhTxQeHxkx68VmFT</property>
+    <property name="acs-api-key-production" type="string">2qfmC68ltGDi3XQbjFUtzNg5FaJJP8E7</property>
+    <property name="acs-oauth-secret-development" type="string">1yoZwPX9bWfOucE54QASiqXbvcwCDkde</property>
+    <property name="acs-oauth-key-development" type="string">tdK1SCCcZ4Y1hkCFhdcwo4LPKfW0aDpm</property>
+    <property name="acs-api-key-development" type="string">EFzOS8c28vncoCHuo7gfuMcaMjAJxMQo</property>
     <id>com.cheekit.ohenro</id>
     <name>ohenro</name>
     <version>1.0</version>
-    <publisher>issei</publisher>
-    <url>http://cheekit.com</url>
+    <publisher>itoutakayuki</publisher>
+    <url>http://cheek-it.com</url>
     <description>not specified</description>
-    <copyright>2013 by issei</copyright>
+    <copyright>2013 by itoutakayuki</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>false</prerendered-icon>
@@ -21,7 +21,7 @@
     <fullscreen>false</fullscreen>
     <navbar-hidden>false</navbar-hidden>
     <analytics>true</analytics>
-    <guid>38697788-f113-444e-a18a-4bec519bf880</guid>
+    <guid>ca000646-f85c-4401-a515-e5eba9d4a5db</guid>
     <property name="ti.ui.defaultunit" type="string">system</property>
     <iphone>
         <orientations device="iphone">

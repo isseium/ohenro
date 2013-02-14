@@ -1,0 +1,14 @@
+<Alloy>
+	<Window id="view1">
+		<View ns="Ti.Map" id="mymap" />
+        <ButtonBar id="mapButtons" platform="ios" backgroundColor="#369" top="330" height="30" width="200" font="6pt">
+            <!-- The Labels tag sets the ButtonBar.labels property -->
+            <Labels>
+                <Label id="currentButton">現在地</Label>
+                <Label id="zoomInButton">拡大</Label>
+                <Label id="zoomOutButton">縮小</Label>
+            </Labels>
+            <!-- Place additional views for the ButtonBar here. -->
+        </ButtonBar>
+	</Window>
+</Alloy>

@@ -1,0 +1,15 @@
+Logfile initialized
+[INFO] logfile = /Users/itoutakayuki/Documents/Titanium_Studio_Workspace/tohoku88/build.log
+[DEBUG] /Users/itoutakayuki/Library/Application Support/Titanium/mobilesdk/osx/3.0.0.GA/android/builder.py simulator tohoku88 /Applications /Users/itoutakayuki/Documents/Titanium_Studio_Workspace/tohoku88 com.cheekit.tohoku88 12 WVGA854 
+[INFO] Building tohoku88 for Android ... one moment
+[INFO] plugin=/Users/itoutakayuki/Library/Application Support/Titanium/plugins/ti.alloy/1.0/plugin.py
+[INFO] Detected compiler plugin: ti.alloy/1.0
+[INFO] Titanium SDK version: 3.0.0 (12/12/12 18:49 a5894b3)
+[DEBUG] Waiting for device to be ready ...
+[TRACE] adb devices returned 0 devices/emulators
+[TRACE] adb devices returned 0 devices/emulators
+[TRACE] adb devices returned 0 devices/emulators
+[TRACE] adb devices returned 0 devices/emulators
+[TRACE] adb devices returned 0 devices/emulators
+[TRACE] adb devices returned 0 devices/emulators
+[ERROR] Timed out waiting for emulator to be ready, you may need to close the emulator and try again
