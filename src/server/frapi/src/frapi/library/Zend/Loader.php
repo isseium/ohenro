@@ -143,7 +143,10 @@ class Zend_Loader
          * Try finding for the plain filename in the include_path.
          */
         if ($once) {
-            include_once $filename;
+            if($filename == "modules.php"){
+            }else{
+                include_once $filename;
+            }
         } else {
             include $filename;
         }

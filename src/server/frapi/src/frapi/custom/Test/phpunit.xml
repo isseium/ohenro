@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-  colors="true"
+  colors="false"
   bootstrap="bootstrap.php">
   <testsuite name="unit">
     <directory>./unit/</directory>

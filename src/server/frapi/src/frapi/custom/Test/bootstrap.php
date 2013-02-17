@@ -1,17 +1,7 @@
 <?php
-set_include_path(get_include_path() . ':' . dirname(__file__) . '/unit');
-set_include_path(get_include_path() . ':' . dirname(__file__) . '/../Model/');
-
-
+require_once( dirname(__file__) . '/../../tests/bootstrap.php');
+set_include_path(get_include_path() . PATH_SEPARATOR . CUSTOM_PATH . DIRECTORY_SEPARATOR . 'Test' . DIRECTORY_SEPARATOR . 'unit');
 require_once('Cheekit_PHPUnit_Framework_TestCase.class.php');
-
-/**
- * オートロード設定
- */
-spl_autoload_register(function ($class_name){
-    include $class_name . ".class.php";
-});
-
 
 
 ?>

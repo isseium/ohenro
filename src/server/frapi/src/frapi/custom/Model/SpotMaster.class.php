@@ -1,12 +1,7 @@
 <?php
-class SpotMaster {
-    function __construct(){
-    }
-
+class SpotMaster extends OhenroBase {
     function getAllSpots(){
-        return array(
-            "id"    => 1,
-            "name"  => "ほげ",
-        );
+        $spotMasterTable = new Zend_Db_Table('SpotMaster');
+        return $spotMasterTable->fetchAll();
     }
 }
