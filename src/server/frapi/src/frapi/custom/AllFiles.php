@@ -39,3 +39,7 @@ Zend_Db_Table::setDefaultAdapter($dbAdapter);
 // Model以下の読み込み
 require_once(CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'OhenroBase.class.php');
 require_once(CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'SpotMaster.class.php');
+require_once(CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'User.class.php');
+require_once(CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'UserFactory.class.php');
+require_once(CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'SocialAccount.class.php');
+require_once(CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'SocialAccountManager.class.php');

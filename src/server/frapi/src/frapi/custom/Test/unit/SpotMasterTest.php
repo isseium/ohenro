@@ -6,8 +6,8 @@ class SpotMasterTest extends Cheekit_PHPUnit_Framework_TestCase
         $this->assertNotNull($spotMaster);
     }
 
-#    public function test_全体取得(){
-#        $spotMaster = new SpotMaster();
-#        $this->assertEquals($spotMaster->getAllSpots(), array("id" => 1, "name" => "ほげ"));
-#    }
+    public function test_全体取得(){
+        $spotMaster = new SpotMaster();
+        $this->assertEquals(count($spotMaster->getAllSpots()), 2, 'TODO: 将来変更すること');
+    }
 }
