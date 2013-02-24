@@ -1,6 +1,6 @@
 #!/bin/sh -x
 
-for file in $(ls)
+for file in $(ls create_*.sql)
 do
-    echo "mysql -u issei_ohenro -p < $file"
+    mysql ohenro_test -u ohenro -p < $file
 done
