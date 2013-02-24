@@ -85,10 +85,42 @@ HEAD: Retrieve the meta information relative to a sibling.&#13;
    <name>Introduction</name>
    <enabled>1</enabled>
    <public>1</public>
-   <description></description>
    <route>/</route>
-   <parameters></parameters>
    <hash>29e39f311db4ca2ef7dacf8d8c493ef69aa29b61</hash>
+  </action>
+  <action>
+   <name>All_spot</name>
+   <enabled>1</enabled>
+   <public>1</public>
+   <description>https://cheekit.atlassian.net/wiki/pages/viewpage.action?pageId=6062153</description>
+   <route>api/spot/all</route>
+   <hash>e1cfd23e696f1587d8d2e51a0a17fd2780a1df6e</hash>
+  </action>
+  <action>
+   <name>Register_user</name>
+   <enabled>1</enabled>
+   <public>1</public>
+   <description>this is user register</description>
+   <route>/api/user/register</route>
+   <hash>18c46a3117a946d7eaabe2d935eb6d7ab7006ef0</hash>
+   <parameters>
+    <parameter>
+     <name>name</name>
+     <required>1</required>
+    </parameter>
+    <parameter>
+     <name>social_type</name>
+     <required>1</required>
+    </parameter>
+    <parameter>
+     <name>social_token</name>
+     <required>1</required>
+    </parameter>
+    <parameter>
+     <name>social_secret</name>
+     <required>1</required>
+    </parameter>
+   </parameters>
   </action>
  </actions>
 </frapi-config>

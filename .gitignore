@@ -1,0 +1,4 @@
+/src/server/frapi/src/frapi/custom/Config/config.ini
+*.pem
+*.swp
+*.swo

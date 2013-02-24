@@ -1,5 +1,4 @@
 <?php
-
 require_once realpath(dirname(__FILE__) . '/../library/Frapi/AllFiles.php');
 
 define('APPLICATION_PATH', ROOT_PATH . '/admin/application');
