@@ -43,3 +43,7 @@ require_once(CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'User.class.php');
 require_once(CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'UserFactory.class.php');
 require_once(CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'SocialAccount.class.php');
 require_once(CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'SocialAccountManager.class.php');
+require_once(CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'Spot.class.php');
+require_once(CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'SpotManager.class.php');
+require_once(CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'Checkin.class.php');
+require_once(CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'CheckinManager.class.php');

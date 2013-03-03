@@ -122,5 +122,27 @@ HEAD: Retrieve the meta information relative to a sibling.&#13;
     </parameter>
    </parameters>
   </action>
+  <action>
+   <name>Spot_checkin</name>
+   <enabled>1</enabled>
+   <public>1</public>
+   <description>CheckIn</description>
+   <route>api/spot/checkin</route>
+   <hash>1ec6c3c0a72ee775ab986ad48132210190e3a001</hash>
+   <parameters>
+    <parameter>
+     <name>token</name>
+     <required>1</required>
+    </parameter>
+    <parameter>
+     <name>spot_id</name>
+     <required>1</required>
+    </parameter>
+    <parameter>
+     <name>comment</name>
+     <required>1</required>
+    </parameter>
+   </parameters>
+  </action>
  </actions>
 </frapi-config>
