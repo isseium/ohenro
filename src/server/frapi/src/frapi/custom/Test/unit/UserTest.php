@@ -19,4 +19,10 @@ class UserTest extends Cheekit_PHPUnit_Framework_TestCase
         $user = UserFactory::generateByToken('00a5f7f7e7124313e12ca14efe8f5c81e59b7a15');
         $this->assertEquals($user->name, 'name2');
     }
+
+    public function test_シェア先の論理和を生成() {
+        $user = UserFactory::generateByToken('00a5f7f7e7124313e12ca14efe8f5c81e59b7a15');
+        $dist = $user->generateShareDist();
+        $this->assertEquals($dist, 3);
+    }
 }

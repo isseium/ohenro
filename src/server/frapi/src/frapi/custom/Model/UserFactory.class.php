@@ -19,7 +19,12 @@ class UserFactory extends OhenroBase {
         }
 
         // ユーザクラスを生成して返却
-        return new User($row->name, $row->token);
+        $user = new User($row->name, $row->token);
+        $user->id         = $row->id;
+        $user->created_at = $row->created_at;
+        $user->updated_at = $row->updated_at;
+
+        return $user;
     }
 
     public static function generateByUserId ($user_id){

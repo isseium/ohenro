@@ -53,6 +53,20 @@ class User extends OhenroBase {
         return true;
     }
 
+    /**
+     * シェア先（social_type）の論理和を返却
+     */
+    public function generateShareDist(){
+        $socialAccounts = SocialAccountManager::generateByUserId($this->id);
+
+        $result = 0;
+        foreach($socialAccounts as $s){
+            $result |= $s->social_type;
+        }
+
+        return $result;
+    }
+
     /*
      * OhenroToken の生成
      *
@@ -61,6 +75,7 @@ class User extends OhenroBase {
     private function generateToken($key, $seed = "Sample"){      # TODO: Seed の隠蔽
         return sha1($key . ":" . time());
     }
+
 
     // 一意制約チェック
     private function _isUniqueName($name){
