@@ -15,7 +15,9 @@ class SocialAccountManager extends OhenroBase {
         // 存在しないときは 空配列 を返却
         $socialAccounts = array();
         foreach($rows as $row){
-            $socialAccounts[] = new SocialAccount($row->user_id, $row->social_type, $row->token, $row->secret, $row->share);
+            $socialAccounts[] = new SocialAccount(
+                $row->user_id, $row->social_type, $row->token, $row->secret, $row->share, $row->created_at, $row->updated_at
+            );
         }
 
         return $socialAccounts;
@@ -35,6 +37,8 @@ class SocialAccountManager extends OhenroBase {
             return null;
         }
 
-        return new SocialAccount($row->user_id, $row->social_type, $row->token, $row->secret, $row->share);
+        return new SocialAccount(
+            $row->user_id, $row->social_type, $row->token, $row->secret, $row->share, $row->created_at, $row->updated_at
+        );
     }
 }

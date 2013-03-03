@@ -148,9 +148,22 @@ HEAD: Retrieve the meta information relative to a sibling.&#13;
    <name>Spot_my</name>
    <enabled>1</enabled>
    <public>1</public>
-   <description></description>
    <route>api/spot/my</route>
    <hash>dfa356111a816eb9e9039115574fdf79a2333f9a</hash>
+   <parameters>
+    <parameter>
+     <name>token</name>
+     <required>1</required>
+    </parameter>
+   </parameters>
+  </action>
+  <action>
+   <name>User_my</name>
+   <enabled>1</enabled>
+   <public>1</public>
+   <description></description>
+   <route>api/user/my</route>
+   <hash>a5b3d70769057d3c9ed3d644a5adad88c1b31bed</hash>
    <parameters>
     <parameter>
      <name>token</name>
