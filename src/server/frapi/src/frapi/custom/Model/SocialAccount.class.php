@@ -6,7 +6,7 @@ class SocialAccount extends OhenroBase {
     public $secret;
     public $share;
 
-    function __construct($user_id, $social_type, $token, $secret, $share, $created_at, $updated_at){
+    function __construct($user_id, $social_type, $token, $secret, $share, $created_at = null, $updated_at = null){
         $this->user_id = $user_id;
         $this->social_type = $social_type;
         $this->token = $token;
