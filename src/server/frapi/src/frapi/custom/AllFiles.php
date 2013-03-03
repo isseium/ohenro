@@ -47,3 +47,4 @@ require_once(CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'Spot.class.php');
 require_once(CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'SpotManager.class.php');
 require_once(CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'Checkin.class.php');
 require_once(CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'CheckinManager.class.php');
+require_once(CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'ShareQueue.class.php');

@@ -102,6 +102,10 @@ class Action_Spot_checkin extends Frapi_Action implements Frapi_Action_Interface
         $spot->checkin($user, $comment);
         $checkin = CheckinManager::generateByCheckinId($spot->checkin_id);
 
+        // シェア設定
+        ShareQueue::enqueue($user, $checkin->id);
+
+        // レスポンス
         $response = array(
             "id" => $checkin->id,
             "created_at" => $checkin->created_at,
