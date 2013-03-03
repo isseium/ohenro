@@ -75,9 +75,4 @@ class User extends OhenroBase {
     private function generateToken($key, $seed = "Sample"){      # TODO: Seed の隠蔽
         return sha1($key . ":" . time());
     }
-
-
-    // 一意制約チェック
-    private function _isUniqueName($name){
-    }
 }
