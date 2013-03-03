@@ -144,5 +144,19 @@ HEAD: Retrieve the meta information relative to a sibling.&#13;
     </parameter>
    </parameters>
   </action>
+  <action>
+   <name>Spot_my</name>
+   <enabled>1</enabled>
+   <public>1</public>
+   <description></description>
+   <route>api/spot/my</route>
+   <hash>dfa356111a816eb9e9039115574fdf79a2333f9a</hash>
+   <parameters>
+    <parameter>
+     <name>token</name>
+     <required>1</required>
+    </parameter>
+   </parameters>
+  </action>
  </actions>
 </frapi-config>
