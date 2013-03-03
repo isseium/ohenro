@@ -31,7 +31,6 @@ class SocialAccountManager extends OhenroBase {
     public static function generateBySocialToken($social_type, $token, $secret = null){
         $socialAccountsTable = new Zend_Db_Table('SocialAccounts');
         $select = $socialAccountsTable->select()->where('social_type = ?', $social_type);
-        
 
         if($token){
             $select = $select->where('token = ?', $token);
