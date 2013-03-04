@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="view1">
+	<Window id="mapView">
 		<View ns="Ti.Map" id="mymap" />
         <ButtonBar id="mapButtons" platform="ios" backgroundColor="#369" top="330" height="30" width="200" font="6pt">
             <!-- The Labels tag sets the ButtonBar.labels property -->

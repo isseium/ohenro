@@ -1,0 +1,10 @@
+<Alloy>
+	<Window id="loginView" title="ログイン">
+		<View>
+			<ImageView id="image" top="30" left="30"/>
+			<Label id="name" top="45" left="80" width="200" height="35"/>
+			<Button id="twitterButton" title="twitterにログインする" top="120" image="/twitterButton.png"/>
+			<LoginButton ns="Ti.Facebook" id="facebookButton" />
+		</View>
+	</Window>
+</Alloy>
