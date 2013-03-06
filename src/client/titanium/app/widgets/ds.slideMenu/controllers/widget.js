@@ -44,11 +44,8 @@ $.innerwin.addEventListener('touchmove', function(e) {
 	}
 });
 
-$.button.addEventListener('singletap', function(e) {
-	$.toggleSlider();
-});
-
 var hasSlided = false;
+
 exports.toggleSlider = function() {
 	if (!hasSlided) {
 		$.win.animate(animateLeft);
@@ -58,3 +55,23 @@ exports.toggleSlider = function() {
 		hasSlided = false;
 	}
 }
+
+var leftButton = Ti.UI.createButton({
+	left : "10",
+	top : "7",
+	width : "35",
+	height : "30",
+	style : "none",
+	image:"/ds.slideMenu/ButtonMenu.png"	
+});
+
+$.innerwin.setRightNavButton($.rightButton);
+$.innerwin.setLeftNavButton(leftButton);
+
+$.rightButton.addEventListener('click', function(e) {
+	$.trigger('rightButton',e);
+});
+
+leftButton.addEventListener('click', function(e) {
+	$.toggleSlider();
+});
