@@ -1,5 +1,6 @@
 /src/server/frapi/src/frapi/custom/Config/config.ini
 /src/client/titanium/build
+/src/client/titanium/Resources
 *.pem
 *.swp
 *.swn
