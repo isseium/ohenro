@@ -1,1 +1,0 @@
-/Users/issei/repos/ohenro/src/client/titanium/Resources/app.js

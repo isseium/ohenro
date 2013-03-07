@@ -1,3 +1,0 @@
-dependencies: \
-  /Users/issei/repos/ohenro/src/client/titanium/build/iphone/Classes/TiThreading.m \
-  /Users/issei/repos/ohenro/src/client/titanium/build/iphone/Classes/TiThreading.h

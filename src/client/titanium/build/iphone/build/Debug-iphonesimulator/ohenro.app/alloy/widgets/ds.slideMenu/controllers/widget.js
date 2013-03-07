@@ -1,1 +1,0 @@
-/Users/issei/repos/ohenro/src/client/titanium/Resources/alloy/widgets/ds.slideMenu/controllers/widget.js

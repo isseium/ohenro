@@ -18,10 +18,21 @@ exports.setAnnotation = function(data){
 		});
 		$.mymap.addAnnotation(anotation);
 	}
-	
+
 	var region = {latitude:data[0].latitude,longitude:data[0].longitude,animate:true,latitudeDelta:0.04, longitudeDelta:0.04};
-	$.mymap.setLocation(region);	
+	$.mymap.setLocation(region);
 };
+
+/**
+ * マップのタップを制御
+ */
+$.mymap.addEventListener('click', function(e){
+    // ピンのタイトルをタップしたとき
+    // refs. http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.Map-method-createAnnotation
+    if (e.clicksource == 'title'){
+        // alert(e.title);
+    }
+});
 
 //テーブルビューをクリックし、名所の場所を表示
 exports.chengePoint = function(lat,lon){
@@ -54,7 +65,7 @@ $.mapButtons.addEventListener('click', function(e){
 		            pincolor:Titanium.Map.ANNOTATION_GREEN,
 		            animate:true
 		        });
-	 		});		
+	 		});
 	 		break;
 
 		case 1:
@@ -63,6 +74,6 @@ $.mapButtons.addEventListener('click', function(e){
 
 		case 2:
 		alert("ズームアウト");
-		break;		
+		break;
 	}
 });
