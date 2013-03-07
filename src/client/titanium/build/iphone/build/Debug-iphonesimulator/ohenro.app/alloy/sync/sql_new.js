@@ -1,0 +1,1 @@
+/Users/issei/repos/ohenro/src/client/titanium/Resources/alloy/sync/sql_new.js

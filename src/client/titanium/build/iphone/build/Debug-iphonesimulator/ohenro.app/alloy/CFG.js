@@ -1,0 +1,1 @@
+/Users/issei/repos/ohenro/src/client/titanium/Resources/alloy/CFG.js
