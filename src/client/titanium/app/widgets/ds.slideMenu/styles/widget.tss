@@ -30,11 +30,9 @@
 	left : "0",
 	width : Ti.Platform.displayCaps.platformWidth
 },
-"#button": {
-	image: "/ds.slideMenu/ButtonMenu.png",
-	left : "10",
-	top : "7",
-	width : "35",
-	height : "30",
-	style : "none"
+
+"#rightButton": {
+	title:"ログイン",
+	right : "10",
+	top : "7"
 }

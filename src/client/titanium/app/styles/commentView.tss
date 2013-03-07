@@ -1,0 +1,17 @@
+"title": {
+
+},
+"detailArea": {
+  	color: "#666",
+  	borderWidth:2,
+    borderColor:'#bbb',
+    borderRadius:5,
+    color:'#888'
+},
+"commentArea": {
+	borderWidth:2,
+	borderColor:'#bbb',
+	borderRadius:5
+},
+"postButton": {
+}
