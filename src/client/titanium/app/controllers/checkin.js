@@ -1,4 +1,8 @@
 
+
+var ApiMapper = require("apiMapper").ApiMapper;
+var apiMapper = new ApiMapper();
+
 /**
  * コントローラ起動時に渡される引数処理
  */
@@ -11,8 +15,9 @@ $.description.text = $.args.description || '';
 // $.image.image = args.imagePath;
 
 // 呼び出し元からナビゲーションバーをセットする
-exports.setNavigation = function(nav){
+exports.setNavigation = function(nav, parent){
     $.nav = nav;
+    $.parent = parent;
 };
 
 // Checkinの有効無効設定
@@ -56,8 +61,26 @@ $.comment.addEventListener('focus', function(e){
 /**
  * スポットにチェックインする
  */
-var checkinSpot = function checkinSpot(spot_id, comment){
-    alert('Checkin!');
+var checkinSpot = function checkinSpot(){
+    var spot_id = $.args.spot_id;
+    var comment = $.comment.value;
+
+    apiMapper.spotcheckinApi(Alloy.Globals.user.token, spot_id, comment,
+        function(e){
+            //成功時
+            Ti.API.info("Received text: " + this.responseText);
+            Ti.API.info('Checkin completed');
+
+            // Map画面に戻る
+            $.nav.close($.parent);
+//            $.nav.group.close($.checkin.getView());
+        },
+        function(e){
+            //失敗時
+            Ti.API.info("Received text: " + this.responseText);
+            alert('チェックインに失敗しました : ' + e.data);
+        }
+    );
 };
 
 

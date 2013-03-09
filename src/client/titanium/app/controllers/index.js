@@ -1,6 +1,7 @@
 var ApiMapper = require("apiMapper").ApiMapper;
 
 // 地図表示用Viewを表示する
+// TODO: currentViewがわかりにくいので変数名変更
 var currentView = Alloy.createController("mapView");
 currentView.setNavigation($.ds.nav);    // Navigationバーのセット
 $.ds.innerwin.add(currentView.getView());
@@ -105,25 +106,6 @@ $.ds.tableView.addEventListener('click', function selectRow(e) {
 	currentView.chengePoint(lat,lon);
 	$.ds.toggleSlider();
 });
-/**
- * 地図上のピンを押下時の操作
- */
-// respond to detail event triggered on index controller
-currentView.on('commentView', function(e) {
-	var id = e.myid;
-	var args = {
-		title : data[id].title,
-		imagePath:data[id].imagePath,
-		detail:data[id].detail
-	};
-	// get the detail controller and window references
-	var controller = Alloy.createController('commentView',args);
-	// var controller = Alloy.createController('commentView');
-	var win = controller.getView();
-	// $.ds.leftButton.visible = false;
-	$.ds.nav.title = data[id].title;
-	$.ds.nav.open(win);
-});
 
 /**
  * ログインボタンが押下された際の操作
@@ -134,6 +116,9 @@ $.ds.rightButton.addEventListener('click', function(e) {
 	// $.ds.leftButton.visible = false;
 	$.ds.nav.open(win);
 	$.ds.nav.title = 'ログイン';
+	Ti.API.info(JSON.stringify($.ds.nav));
+	$.ds.nav.window.leftNavButton.fireEvent('click');
+	// win.leftNavButton.fireEvent('click');
 	Ti.API.info("rightButton");
 });
 
@@ -149,6 +134,7 @@ apiMapper.spotAllApi(
 		 for(i = 0; i < json.spots.length; i++){
 			var tmpData = new Object();
 		 	tmpData.prefecture = '青森県'; //現在固定値
+		 	tmpData.spot_id = json.spots[i].id;
 		 	tmpData.title = json.spots[i].name;
 		 	tmpData.description = json.spots[i].description;
 		 	tmpData.latitude = json.spots[i].location.lat;

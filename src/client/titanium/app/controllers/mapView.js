@@ -1,4 +1,10 @@
 
+// Debug
+Alloy.Globals.user = new Object();
+Alloy.Globals.user.token = "00a5f7f7e7124313e12ca14efe8f5c81e59b7a15";
+
+
+
 // 呼び出し元からナビゲーションバーをセットする
 exports.setNavigation = function(nav){
     $.nav = nav;
@@ -56,14 +62,17 @@ $.mymap.addEventListener('click', function(e){
     		spotPosition: {latitude: e.annotation.latitude, longitude: e.annotation.longitude},
     		currentPosition: Alloy.Globals.currentPosition,                  // 現在地情報
     	};
-        var view = Alloy.createController('checkin', args).getView();
+        var controller = Alloy.createController('checkin', args);
+        var view = controller.getView();
 
         /**
          * ナビゲーションバー関連
          */
-        view.setNavigation($.nav);
+        // var parentView =
+        controller.setNavigation($.nav, view);
+        // view.setNavigation($.nav, parentView);
         view.title = e.annotation.title;
-        $.nav.open(view);                    // ナビゲーション経由でオープン
+        $.nav.open(view);
     }
 });
 
