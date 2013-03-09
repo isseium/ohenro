@@ -1,0 +1,38 @@
+".container": {
+    backgroundColor: 'white',
+	layout:'vertical',
+},
+"#scrollView": {
+	layout:'vertical',
+},
+"#description": {
+    width: '90%',
+    height: Ti.UI.SIZE,
+},
+"#comment": {
+    height: '120dp',
+    width: '90%',
+    enableReturnKey: true,
+    suppressReturn: false,
+    font: {
+        fontSize: '18dp',
+    },
+},
+"#checkinButton": {
+    top: '10dp',
+    width: '90%',
+    font: {
+        fontSize: '18dp',
+        fontWeight: 'bold'
+    },
+},
+"ButtonBar": {
+    width: "90%"
+},
+".frame": {
+    top: '10dp',
+	layout:'vertical',
+    borderWidth: 2,
+    borderColor: "black",
+    borderRadius: 5,
+},

@@ -1,79 +1,107 @@
-// var data = [
-    // {latitude:'40.538599', longitude:'141.55756', title:'蕪島神社',prefecture:'青森県',flag:1,myid:1},
-    // {latitude:'41.327126', longitude:'141.091032', title:'恐山',prefecture:'青森県',flag:0,myid:2},
-    // {latitude:'40.009295', longitude:'141.901529', title:'譜代浜',prefecture:'岩手県',flag:0,myid:3},
-    // {latitude:'39.008344', longitude:'141.629423', title:'奇跡の一本松',prefecture:'岩手',flag:0,myid:4},
-    // {latitude:'39.094786', longitude:'141.719759', title:'長谷寺',prefecture:'岩手県',flag:1,myid:5},
-    // {latitude:'39.032125', longitude:'141.738649', title:'大善院蛸浦観音',prefecture:'岩手県',flag:1,myid:6},
-// ];
 
-exports.setAnnotation = function(data){
-	for ( i = 0; i < data.length; i++) {
-		var anotation = null;
-		var anotation = Ti.Map.createAnnotation({
-			latitude: data[i].latitude,
-			longitude: data[i].longitude,
-			title: data[i].title,
-			animate: true
-		});
-		$.mymap.addAnnotation(anotation);
-	}
-
-	var region = {latitude:data[0].latitude,longitude:data[0].longitude,animate:true,latitudeDelta:0.04, longitudeDelta:0.04};
-	$.mymap.setLocation(region);
+// 呼び出し元からナビゲーションバーをセットする
+exports.setNavigation = function(nav){
+    $.nav = nav;
 };
 
 /**
- * マップのタップを制御
+ * アノテーション（ピン）を配置する
+ *
+ * @TODO  引数がわかりにくいのでどこかで直す
+ * @param array<mixed> data    スポットデータ
+ *                      number :spot_id     スポットID
+ *                      string :title       スポット名
+ *                      string :description スポット概要
+ *                      number :latitude    緯度
+ *                      number :longitude   経度
+ * @return void
+ */
+exports.setAnnotation = function(data){
+	for ( i = 0; i < data.length; i++) {
+		var annotation = Ti.Map.createAnnotation({
+		    myid: i,
+			latitude: data[i].latitude,
+			longitude: data[i].longitude,
+			title: data[i].title,
+			animate: true,
+
+			// 任意プロパティ
+		    spot_id: data[i].spot_id,
+			mydescription: data[i].description,
+		});
+		$.mymap.addAnnotation(annotation);
+	}
+
+    // 地図の中心を1つ目のスポットに設定（デバッグ用）
+    // TODO: 削除すること
+    var scrollTo1stSpot = function(){
+        var region = {latitude:data[0].latitude,longitude:data[0].longitude,animate:true,latitudeDelta:0.04, longitudeDelta:0.04};
+    	$.mymap.setLocation(region);
+    }
+    scrollTo1stSpot();
+};
+
+/**
+ * マップタップ時の挙動を定義
  */
 $.mymap.addEventListener('click', function(e){
-    // ピンのタイトルをタップしたとき
+    // ピンのタイトルをタップしたときに checkin 画面表示
     // refs. http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.Map-method-createAnnotation
     if (e.clicksource == 'title'){
-        // alert(e.title);
+    	var args = {
+    	    spot_id: e.annotation.spot_id,
+    		title : e.annotation.title,
+    		imagePath: e.annotation.imagePath,
+    		description: e.annotation.mydescription,                         // description というプロパティは予約されているので使えないみたい
+    		spotPosition: {latitude: e.annotation.latitude, longitude: e.annotation.longitude},
+    		currentPosition: Alloy.Globals.currentPosition,                  // 現在地情報
+    	};
+        var view = Alloy.createController('checkin', args).getView();
+
+        /**
+         * ナビゲーションバー関連
+         */
+        view.setNavigation($.nav);
+        view.title = e.annotation.title;
+        $.nav.open(view);                    // ナビゲーション経由でオープン
     }
 });
 
 //テーブルビューをクリックし、名所の場所を表示
+// TODO: Typo だよ chenge => change
 exports.chengePoint = function(lat,lon){
 	var region = {latitude:lat,longitude:lon,animate:true,latitudeDelta:0.04, longitudeDelta:0.04};
 	$.mymap.setLocation(region);
 };
 
+// 定期的に現在地情報を取得し、Alloyのグローバル領域に設定する
+Ti.Geolocation.purpose = "For checkin";
+Ti.Geolocation.addEventListener('location', function(){
+    Ti.Geolocation.getCurrentPosition(function(e){
+        if (e.error){
+            Titanium.API.error(e.error);
+            return;
+        }
+
+        // Global変数に格納
+        Alloy.Globals.currentPosition = e.coords;
+    });
+});
+
 //現在地ボタンのイベント
 $.mapButtons.addEventListener('click', function(e){
 	switch(e.index){
 		case 0:
-			Ti.Geolocation.getCurrentPosition(function(e){
-			　// エラー時はコールバック関数の引数のerrorプロパティがセットされる
-			　if (e.error){
-			　　Titanium.API.error(e.error);
-			　　return;
-			　}
-			　// 状態取得の処理
-				var coords = e.coords;
-		  		Ti.API.info('緯度' + coords.latitude);
-		  		Ti.API.info('軽度' + coords.longitude);
-				var regionCP = {latitude:coords.latitude,longitude:coords.longitude,animate:true,latitudeDelta:0.04, longitudeDelta:0.04};
-				Ti.API.info('IN SV CHANGE');
-				// set location to sv
-				$.mymap.setLocation(regionCP);
-		        // ピンを立てる
-		        currentPos = Titanium.Map.createAnnotation({
-		            latitude:coords.latitude,
-		            longitude:coords.longitude,
-		            pincolor:Titanium.Map.ANNOTATION_GREEN,
-		            animate:true
-		        });
-	 		});
-	 		break;
-
-		case 1:
-		alert("ズーム");
-		break;
-
-		case 2:
-		alert("ズームアウト");
-		break;
+            // 現在地を表示の中心にする
+            var regionCP = {
+                latitude: Alloy.Globals.currentPosition.latitude,
+                longitude: Alloy.Globals.currentPosition.longitude,
+                animate: true,
+                latitudeDelta: 0.04,
+                longitudeDelta: 0.04
+            };
+            // 現在地を地図の中心にする
+            $.mymap.setLocation(regionCP);
+            break;
 	}
 });

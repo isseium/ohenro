@@ -1,19 +1,25 @@
 var ApiMapper = require("apiMapper").ApiMapper;
+
+// 地図表示用Viewを表示する
 var currentView = Alloy.createController("mapView");
+currentView.setNavigation($.ds.nav);    // Navigationバーのセット
 $.ds.innerwin.add(currentView.getView());
 
-if (Ti.Platform.osname === 'iphone')
+// TODO: 不明あとで聞く
+if (Ti.Platform.osname === 'iphone'){
 	$.win.open({
 		transition : Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
 	});
-else
-$.win.open();
+} else {
+    $.win.open();
+}
 
 /***
- * 
+ *
  * テーブルビューについて
  * ******************************/
 
+// TODO: data がなにを表しているのかわかりにくいのであとで修正
 var data = new Object();
 // [
     // {latitude:'40.538599', longitude:'141.55756', title:'蕪島神社',prefecture:'青森県',flag:1,myid:0,imagePath:'/image01.jpg',detail:'蕪島神社'},
@@ -24,6 +30,7 @@ var data = new Object();
     // {latitude:'39.032125', longitude:'141.738649', title:'大善院蛸浦観音',prefecture:'岩手県',flag:1,myid:5,imagePath:'/image01.jpg',detail:'大善院蛸浦観音'}
 // ];
 
+// TODO: View に関する技術が記載されている。MVCの分離（保守性向上）のためあとで修正する
 function setTableData(spotData){
 	data = spotData;
 	var tableData = [];
@@ -51,7 +58,7 @@ function setTableData(spotData){
 				}]
 			}
 		});
-	
+
 		var customLabel = Ti.UI.createLabel({
 			top : 8,
 			bottom : 8,
@@ -107,7 +114,7 @@ currentView.on('commentView', function(e) {
 	var args = {
 		title : data[id].title,
 		imagePath:data[id].imagePath,
-		detail:data[id].detail		
+		detail:data[id].detail
 	};
 	// get the detail controller and window references
 	var controller = Alloy.createController('commentView',args);
@@ -116,7 +123,6 @@ currentView.on('commentView', function(e) {
 	// $.ds.leftButton.visible = false;
 	$.ds.nav.title = data[id].title;
 	$.ds.nav.open(win);
-	Ti.API.info("currentView");
 });
 
 /**
@@ -126,7 +132,7 @@ $.ds.rightButton.addEventListener('click', function(e) {
 	var controller = Alloy.createController('loginView');
 	var win = controller.getView();
 	// $.ds.leftButton.visible = false;
-	$.ds.nav.open(win);	
+	$.ds.nav.open(win);
 	$.ds.nav.title = 'ログイン';
 	Ti.API.info("rightButton");
 });
@@ -144,9 +150,9 @@ apiMapper.spotAllApi(
 			var tmpData = new Object();
 		 	tmpData.prefecture = '青森県'; //現在固定値
 		 	tmpData.title = json.spots[i].name;
+		 	tmpData.description = json.spots[i].description;
 		 	tmpData.latitude = json.spots[i].location.lat;
 		 	tmpData.longitude = json.spots[i].location.lon;
-		 	tmpData.description = json.spots[i].description;
 		 	spotData.push(tmpData);
 		 }
 		setTableData(spotData);
