@@ -97,20 +97,44 @@ Ti.Geolocation.addEventListener('location', function(){
     });
 });
 
+/**
+ * 現在地を表示の中心にする
+ *
+ * @param  void
+ * @return void
+ */
+function scrollToCurrentPosition(){
+    $.mymap.setLocation({
+        latitude: Alloy.Globals.currentPosition.latitude,
+        longitude: Alloy.Globals.currentPosition.longitude,
+        animate: true,
+        latitudeDelta: 0.04,
+        longitudeDelta: 0.04
+    });
+}
+
+/**
+ * 全体が俯瞰できるPositionに変更する
+ *
+ * @param  void
+ * @return void
+ */
+function scrollToOverheadView(){
+    $.mymap.setLocation({
+        latitude: 38.591114,
+        longitude: 140.95459,
+        animate: true,
+        latitudeDelta: 4,
+        longitudeDelta: 4,
+    });
+}
+
 //現在地ボタンのイベント
+/*
 $.mapButtons.addEventListener('click', function(e){
-	switch(e.index){
+    switch(e.index){
 		case 0:
-            // 現在地を表示の中心にする
-            var regionCP = {
-                latitude: Alloy.Globals.currentPosition.latitude,
-                longitude: Alloy.Globals.currentPosition.longitude,
-                animate: true,
-                latitudeDelta: 0.04,
-                longitudeDelta: 0.04
-            };
-            // 現在地を地図の中心にする
-            $.mymap.setLocation(regionCP);
             break;
 	}
 });
+*/
