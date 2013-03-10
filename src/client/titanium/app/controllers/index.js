@@ -1,14 +1,14 @@
-// Debug
-Alloy.Globals.user = new Object();
-Alloy.Globals.user.token = "00a5f7f7e7124313e12ca14efe8f5c81e59b7a15";
-// TODO: データストアからtokenを取得して、tokenから各種情報を取得する
-
-
+// APIMapper の準備
 var ApiMapper = require("apiMapper").ApiMapper;
+
+// ユーザ情報を設定する
+initUser();
 
 // 地図表示用Viewを表示する
 var mapView = Alloy.createController("mapView");
 mapView.setNavigation($.ds.nav);    // Navigationバーのセット
+
+// 地図画面に戻るたびに、情報を更新する
 $.ds.innerwin.addEventListener('focus', function(){
     loadSpot();
 });
@@ -132,6 +132,42 @@ $.ds.rightButton.addEventListener('click', function(e) {
 	$.ds.nav.open(win);
 	$.ds.nav.title = 'ログイン';
 });
+
+/**
+ * ユーザ情報初期化
+ * 端末のストアからユーザのtokenを取得する
+ *
+ * @param void
+ * @return void
+ */
+function initUser(){
+    // TODO: ストアからトークンを取得する
+    Alloy.Globals.user = new Object();
+    Alloy.Globals.user.token = "00a5f7f7e7124313e12ca14efe8f5c81e59b7a15"; // TODO: debug 用 あとで消すこと
+
+    // すでにログイン済みのときは、API をたたいてユーザ情報を取得
+    if(Alloy.Globals.user.token){
+        var apiMapper = new ApiMapper();
+        apiMapper.usermyApi(Alloy.Globals.user.token,
+            function(){
+                // 成功したとき
+                var json = eval('(' + this.responseText + ')');
+                Alloy.Globals.user.id = json.user.id;
+                Alloy.Globals.user.name = json.user.name;
+                Alloy.Globals.user.social = [];
+                for(var i=0; i<json.user.social.length; i++){
+                    Alloy.Globals.user.social[i] = json.user.social[i];
+                }
+                Alloy.Globals.user.created_at = json.user.created_at;
+                Alloy.Globals.user.updated_at = json.user.updated_at;
+            },
+            function(){
+                // 失敗したとき
+                alert('データの取得に失敗しました。');
+            }
+        );
+    }
+}
 
 /**
  * 巡礼地情報取得
