@@ -27,6 +27,9 @@ exports.setAnnotation = function(spotData){
 			// 任意プロパティ
 		    spot_id: spotData[i].spot_id,
 			mydescription: spotData[i].description,
+			comment: spotData[i].comment,
+			checkin: spotData[i].checkin,
+			checkin_time: spotData[i].checkin_time,
 		});
 		$.mymap.addAnnotation(annotation);
 	}
@@ -46,6 +49,9 @@ $.mymap.addEventListener('click', function(e){
     		description: e.annotation.mydescription,                         // description というプロパティは予約されているので使えないみたい
     		spotPosition: {latitude: e.annotation.latitude, longitude: e.annotation.longitude},
     		currentPosition: Alloy.Globals.currentPosition,                  // 現在地情報
+    		comment: e.annotation.comment,
+    		checkin: e.annotation.checkin,
+    		checkin_time: e.annotation.checkin_time,
     	};
         var controller = Alloy.createController('checkin', args);
         var view = controller.getView();

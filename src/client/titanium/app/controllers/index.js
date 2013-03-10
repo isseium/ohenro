@@ -9,6 +9,10 @@ var ApiMapper = require("apiMapper").ApiMapper;
 // 地図表示用Viewを表示する
 var mapView = Alloy.createController("mapView");
 mapView.setNavigation($.ds.nav);    // Navigationバーのセット
+$.ds.innerwin.addEventListener('focus', function(){
+    loadSpot();
+});
+
 $.ds.innerwin.add(mapView.getView());
 
 // TODO: 不明あとで聞く
@@ -130,47 +134,50 @@ $.ds.rightButton.addEventListener('click', function(e) {
 });
 
 /**
- * 名所一覧取得
+ * 巡礼地情報取得
+ * @param void
+ * @return void
  */
-var apiMapper = new ApiMapper();
-apiMapper.spotAllApi(
-	function(){
-		// 成功したとき
-        var spotData = {};
-		var json = eval('(' + this.responseText + ')');
-		for(i = 0; i < json.spots.length; i++){
-		    var tmpData = new Object();
-			tmpData.prefecture = '青森県'; //現在固定値
-			tmpData.spot_id = json.spots[i].id;
-			tmpData.title = json.spots[i].name;
-			tmpData.description = json.spots[i].description;
-			tmpData.latitude = json.spots[i].location.lat;
-			tmpData.longitude = json.spots[i].location.lon;
-			tmpData.checkin = false;     // checkinしたか
-			spotData[tmpData.spot_id] = tmpData;
-		}
+function loadSpot(){
+    var apiMapper = new ApiMapper();
+    apiMapper.spotAllApi(
+    	function(){
+    		// 成功したとき
+            var spotData = {};
+    		var json = eval('(' + this.responseText + ')');
+    		for(i = 0; i < json.spots.length; i++){
+    		    var tmpData = new Object();
+    			tmpData.prefecture = '青森県'; //現在固定値
+    			tmpData.spot_id = json.spots[i].id;
+    			tmpData.title = json.spots[i].name;
+    			tmpData.description = json.spots[i].description;
+    			tmpData.latitude = json.spots[i].location.lat;
+    			tmpData.longitude = json.spots[i].location.lon;
+    			tmpData.checkin = false;     // checkinしたか
+    			spotData[tmpData.spot_id] = tmpData;
+    		}
 
-		// 自分のチェックイン情報とマージする
-		if( typeof Alloy.Globals.user.token != 'undefined' ){
-            apiMapper.spotMyApi(
-                Alloy.Globals.user.token,
-                function(){
-                    var json = eval('(' + this.responseText + ')');
-                    for(i = 0; i < json.spots.length; i++){
-                        spotData[json.spots[i].id].checkin = true;
-                        spotData[json.spots[i].id].checkin_id = json.spots[i].checkin_id;
-                        spotData[json.spots[i].id].comment = json.spots[i].comment;
-                        spotData[json.spots[i].id].checkin_time = json.spots[i].updated_at;
+    		// 自分のチェックイン情報とマージする
+    		if( typeof Alloy.Globals.user.token != 'undefined' ){
+                apiMapper.spotMyApi(
+                    Alloy.Globals.user.token,
+                    function(){
+                        var json = eval('(' + this.responseText + ')');
+                        for(i = 0; i < json.spots.length; i++){
+                            spotData[json.spots[i].id].checkin = true;
+                            spotData[json.spots[i].id].checkin_id = json.spots[i].checkin_id;
+                            spotData[json.spots[i].id].comment = json.spots[i].comment;
+                            spotData[json.spots[i].id].checkin_time = json.spots[i].updated_at;
+                        }
+                        mapView.setAnnotation(spotData);
+                        setTableData(spotData);
                     }
-                    mapView.setAnnotation(spotData);
-                    setTableData(spotData);
-                }
-            );
-		}
-
-	},
-	function(){
-		// 失敗したとき
-		alert('データの取得に失敗しました。');
-	}
-);
+                );
+    		}
+    	},
+    	function(){
+    		// 失敗したとき
+    		alert('データの取得に失敗しました。');
+    	}
+    );
+}

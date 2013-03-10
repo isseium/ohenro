@@ -27,7 +27,7 @@ if( isUserLogined() &&
     ){
     // チェックイン許可
     $.comment.touchEnabled = true;
-    $.comment.value = "コメント";
+    $.comment.value = $.args.comment || '';
     $.comment.opacity = 1;
     $.checkinButton.touchEnabled = true;
     $.checkin.opacity = 1;
@@ -36,7 +36,12 @@ if( isUserLogined() &&
 
     // ログイン状態に応じてコメントを変更
     if(isUserLogined()){
-        $.comment.value = "スポットに近づくとチェックインすることができます";
+        if($.args.checkin){
+            // すでにチェックインしていたときはコメントを入力
+            $.comment.value = $.args.comment;
+        }else{
+            $.comment.value = "スポットに近づくとチェックインすることができます";
+        }
     }else{
         $.comment.value = "チェックインをするにはログインする必要があります";
     }
