@@ -1,8 +1,14 @@
 // APIMapper の準備
 var ApiMapper = require("apiMapper").ApiMapper;
 
+// Facebook Consumer Token & Secret
+// TODO: あとで別ファイル管理にする
+Ti.Facebook.appid = 606983742650457;
+Ti.Facebook.permissions = ['publish_stream','read_stream'];
+
 // ユーザ情報を設定する
 initUser();
+initView();
 
 // 地図表示用Viewを表示する
 var mapView = Alloy.createController("mapView");
@@ -10,6 +16,14 @@ mapView.setNavigation($.ds.nav);    // Navigationバーのセット
 
 // 地図画面に戻るたびに、情報を更新する
 $.ds.innerwin.addEventListener('focus', function(){
+    // token が含まれているときは情報更新を試みる
+    if(Alloy.Globals.user.token){
+        initUser();
+        initView();
+    }else{
+        alert('チェックインするにはユーザ登録が必要です');
+    }
+
     loadSpot();
 });
 
@@ -124,16 +138,6 @@ $.ds.tableView.addEventListener('click', function selectRow(e) {
 });
 
 /**
- * ログインボタンが押下された際の操作
- */
-$.ds.rightButton.addEventListener('click', function(e) {
-	var controller = Alloy.createController('loginView');
-	var win = controller.getView();
-	$.ds.nav.open(win);
-	$.ds.nav.title = 'ログイン';
-});
-
-/**
  * ユーザ情報初期化
  * 端末のストアからユーザのtokenを取得する
  *
@@ -141,32 +145,36 @@ $.ds.rightButton.addEventListener('click', function(e) {
  * @return void
  */
 function initUser(){
-    // TODO: ストアからトークンを取得する
+    // ストアからトークンを取得する
     Alloy.Globals.user = new Object();
-    Alloy.Globals.user.token = "00a5f7f7e7124313e12ca14efe8f5c81e59b7a15"; // TODO: debug 用 あとで消すこと
+    // token 情報がないときはなにもしない
+    if(! Ti.App.Properties.hasProperty('token')){
+        Ti.API.info('No token');
+        return;
+    }
+    Alloy.Globals.user.token = Titanium.App.Properties.getString('token');
+    Alloy.Globals.user.icon_url = Titanium.App.Properties.getString('icon_url');      // TODO: 将来は API 側に持つこと
 
     // すでにログイン済みのときは、API をたたいてユーザ情報を取得
-    if(Alloy.Globals.user.token){
-        var apiMapper = new ApiMapper();
-        apiMapper.usermyApi(Alloy.Globals.user.token,
-            function(){
-                // 成功したとき
-                var json = eval('(' + this.responseText + ')');
-                Alloy.Globals.user.id = json.user.id;
-                Alloy.Globals.user.name = json.user.name;
-                Alloy.Globals.user.social = [];
-                for(var i=0; i<json.user.social.length; i++){
-                    Alloy.Globals.user.social[i] = json.user.social[i];
-                }
-                Alloy.Globals.user.created_at = json.user.created_at;
-                Alloy.Globals.user.updated_at = json.user.updated_at;
-            },
-            function(){
-                // 失敗したとき
-                alert('データの取得に失敗しました。');
+    var apiMapper = new ApiMapper();
+    apiMapper.usermyApi(Alloy.Globals.user.token,
+        function(){
+            // 成功したとき
+            var json = eval('(' + this.responseText + ')');
+            Alloy.Globals.user.id = json.user.id;
+            Alloy.Globals.user.name = json.user.name;
+            Alloy.Globals.user.social = [];
+            for(var i=0; i<json.user.social.length; i++){
+                Alloy.Globals.user.social[i] = json.user.social[i];
             }
-        );
-    }
+            Alloy.Globals.user.created_at = json.user.created_at;
+            Alloy.Globals.user.updated_at = json.user.updated_at;
+        },
+        function(){
+            // 失敗したとき
+            alert('データの取得に失敗しました。');
+        }
+    );
 }
 
 /**
@@ -193,8 +201,9 @@ function loadSpot(){
     			spotData[tmpData.spot_id] = tmpData;
     		}
 
-    		// 自分のチェックイン情報とマージする
-    		if( typeof Alloy.Globals.user.token != 'undefined' ){
+            // 自分のチェックイン情報とマージする
+            // TODO: setAnnotation と setTableData を必ず実行するようにしたい（いまべたがき）
+            if( typeof Alloy.Globals.user.token != 'undefined' ){
                 apiMapper.spotMyApi(
                     Alloy.Globals.user.token,
                     function(){
@@ -207,13 +216,54 @@ function loadSpot(){
                         }
                         mapView.setAnnotation(spotData);
                         setTableData(spotData);
+                    } ,
+                    function(){
+                        alert('データの取得に失敗しました。 [userMy]');
+            		    // マスタデータのみ表示
+                        mapView.setAnnotation(spotData);
+                        setTableData(spotData);
                     }
                 );
+    		}else{
+    		    // ユーザ登録していないときは、 マスタデータのみ表示
+                mapView.setAnnotation(spotData);
+                setTableData(spotData);
     		}
     	},
     	function(){
     		// 失敗したとき
-    		alert('データの取得に失敗しました。');
+    		Alloy.Globals.user = null;
+    		alert('データの取得に失敗しました。 [spotAll]');
     	}
     );
 }
+
+/**
+ * 右上ボタンの初期化
+ * ユーザ未登録のときは、サインアップ画面へ遷移するボタン
+ * ユーザ登録済みのときは、設定画面へ遷移するボタン
+ */
+function initView(){
+    if(typeof Alloy.Globals.user.token == 'undefined'){
+        // 未登録のとき
+        $.ds.innerwin.setRightNavButton($.ds.signup);
+    }else{
+        // 登録済みのとき
+        $.ds.innerwin.setRightNavButton($.ds.setting);
+    }
+}
+
+$.ds.setting.addEventListener('click', function(){
+    var controller = Alloy.createController('setting');
+    var win = controller.getView();
+    $.ds.nav.open(win);
+    $.ds.nav.title = '設定';
+});
+
+$.ds.signup.addEventListener('click', function(){
+    var controller = Alloy.createController('loginView');
+    var win = controller.getView();
+    controller.setNavigation($.ds.nav, win);
+    $.ds.nav.open(win);
+    $.ds.nav.title = 'ユーザ登録';
+});
