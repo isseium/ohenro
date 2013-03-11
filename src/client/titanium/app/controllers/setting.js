@@ -71,8 +71,8 @@ function updateSocialSetting(switch_button, social_type, token, secret, share){
     );
 }
 
-// TODO: loginView からのコピペなのでなんとかしたい
-Ti.Facebook.addEventListener('login', function(e){
+
+function loginFacebook(e){
     if(e.error){
         alert(e.error);
         $.switch_facebook.value = false;
@@ -84,4 +84,9 @@ Ti.Facebook.addEventListener('login', function(e){
 
     // 更新
     updateSocialSetting(e.source, 2, Ti.Facebook.getAccessToken(), null, 1);
+}
+
+Ti.Facebook.addEventListener('login', loginFacebook);
+$.setting.addEventListener('close', function(){
+    Ti.Facebook.removeEventListener('login', loginFacebook);
 });

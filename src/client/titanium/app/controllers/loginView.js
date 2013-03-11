@@ -9,8 +9,7 @@ exports.setNavigation = function(nav, parent){
     $.parent = parent;
 };
 
-// ログイン後は、トークンのみを保持して、登録情報入力画面へ
-Ti.Facebook.addEventListener('login', function(e){
+var loginFacebook = function(e){
     if(e.error){
         alert(e.error);
         return;
@@ -29,22 +28,6 @@ Ti.Facebook.addEventListener('login', function(e){
         function(e) {
             if (e.success) {
                 var obj = JSON.parse(e.result);
-                /*
-    			var bfImage = Ti.UI.createImageView({
-    				image:obj.picture.data.url,
-    				width:100,
-    				height:100,
-    				top:200
-    			});
-    			$.loginView.add(bfImage);
-
-    			var fbName = Ti.UI.createLabel({
-    				top:280,
-    				text:obj.name
-    			});
-    			$.loginView.add(fbName);
-    			$.facebookButton.hide();
-    			*/
 
                 // 次の画面へ
                 var args = {
@@ -62,7 +45,7 @@ Ti.Facebook.addEventListener('login', function(e){
             }
         }
     );
-})
+};
 
 // Facebook ログインボタン
 $.facebookButton.addEventListener('click', function() {
@@ -82,4 +65,13 @@ $.twitterButton.addEventListener('click', function(e) {
 	    consumerSecret:'p49btQOfliSk8ZZqGjG1Y8pRikB3SOSbjZDNUHsPk'
 	});
 	twitterApi.init();
+});
+
+// ログイン後は、トークンのみを保持して、登録情報入力画面へ
+// FIXME: ログイン画面がたくさんでる。Ti.Facebook が
+Ti.Facebook.removeEventListener('login', loginFacebook);
+Ti.Facebook.addEventListener('login', loginFacebook);
+
+$.loginView.addEventListener('close', function(){
+    Ti.Facebook.removeEventListener('login', loginFacebook);
 });
