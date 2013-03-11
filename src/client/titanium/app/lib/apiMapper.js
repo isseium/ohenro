@@ -10,7 +10,7 @@
 
 /*
  * 天気予報を取得するサンプル
- * 
+ *
 apiMapper.forecastApi(
 	"41",		// 緯度
 	"139.7",	// 経度
@@ -29,7 +29,7 @@ apiMapper.forecastApi(
 
 /*
  * 通知設定をするサンプル
- * 
+ *
 apiMapper.notificationApi(
 	"deviceId",	// device_id
 	"41",		// 緯度
@@ -49,10 +49,10 @@ apiMapper.notificationApi(
 /*
  * プリミティブなAPIアクセサ
  * 原則、プライベートメソッドとする
- * 
+ *
 apiMapper.accessApi(
 	'GET',
-	'http://freeze.test.cheek-it.com/api/forecast.json?lat=41.123&lon=141', 
+	'http://freeze.test.cheek-it.com/api/forecast.json?lat=41.123&lon=141',
 	{},
 	function (){
 		// 成功したとき
@@ -76,10 +76,10 @@ ApiMapper.prototype.accessApi = function(method, uri, param, callback_success, c
 
 		var xhr = Titanium.Network.createHTTPClient();
 		xhr.open(method, uri);
-		xhr.onload = callback_success;	
+		xhr.onload = callback_success;
 		xhr.onerror = callback_failure;
 		xhr.send(param);
-		
+
 		return true;
 };
 ApiMapper.prototype.spotAllApi = function (callback_success, callback_failure){
@@ -117,7 +117,7 @@ ApiMapper.prototype.usermyApi = function (token, callback_success, callback_fail
 		callback_failure);
 }
 
-ApiMapper.prototype.usernotification = function (token,social_type,social_token,social_secret,post, callback_success, callback_failure){
+ApiMapper.prototype.userNotificationApi = function (token,social_type,social_token,social_secret,post, callback_success, callback_failure){
 	return this.accessApi(
 		'POST',
 		this.apiEndpoint + "/user/notification.json",
