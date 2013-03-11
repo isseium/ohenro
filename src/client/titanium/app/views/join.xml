@@ -1,0 +1,8 @@
+<Alloy>
+    <Window id="win" class="container">
+        <View class="inner">
+            <Label id="lblname">ユーザ名</Label>
+            <TextField id="name">
+        </View>
+	</Window>
+</Alloy>
