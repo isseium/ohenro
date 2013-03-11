@@ -16,6 +16,9 @@ exports.setNavigation = function(nav){
  * @return void
  */
 exports.setAnnotation = function(spotData){
+    // 地図のアノテーションを削除
+    $.mymap.removeAllAnnotations();
+
     for ( var i in spotData){
 		var annotation = Ti.Map.createAnnotation({
 		    myid: i,
