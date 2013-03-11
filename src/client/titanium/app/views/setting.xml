@@ -1,0 +1,19 @@
+<Alloy>
+    <Window id="setting">
+        <View class="container">
+            <Label class="frame">
+                <ImageView id="user_icon" />
+                <Label id="username">12345678901234567890</Label>
+            </Label>
+            <Label class="section">チェックイン連携</Label>
+            <View class="switch_frame ">
+                <Label class="switch_label">Twitter</Label>
+                <Switch id="switch_twitter" value="false" />
+            </View>
+            <View class="switch_frame">
+                <Label class="switch_label">Facebook</Label>
+                <Switch id="switch_facebook" value="false"/>
+            </View>
+        </View>
+    </Window>
+</Alloy>

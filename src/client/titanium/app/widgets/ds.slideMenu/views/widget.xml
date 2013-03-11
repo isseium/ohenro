@@ -8,7 +8,8 @@
 				<Window id="innerwin">
 				</Window>
 			</NavigationGroup>
-			<Button id="rightButton" title="login" top="-50dp" />
+			<Button id="signup" title="ユーザ登録" top="-50dp" />
+			<Button id="setting" title="設定" top="-50dp" />
 		</View>
 	</Window>
 </Alloy>

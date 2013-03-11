@@ -62,15 +62,15 @@ var leftButton = Ti.UI.createButton({
 	width : "35",
 	height : "30",
 	style : "none",
-	image:"/ds.slideMenu/ButtonMenu.png"	
+	image:"/ds.slideMenu/ButtonMenu.png"
 });
 
-$.innerwin.setRightNavButton($.rightButton);
+// $.innerwin.setRightNavButton($.rightButton);
 $.innerwin.setLeftNavButton(leftButton);
 
-$.rightButton.addEventListener('click', function(e) {
-	$.trigger('rightButton',e);
-});
+// $.rightButton.addEventListener('click', function(e) {
+// 	$.trigger('rightButton',e);
+// });
 
 leftButton.addEventListener('click', function(e) {
 	$.toggleSlider();
