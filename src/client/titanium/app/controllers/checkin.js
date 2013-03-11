@@ -1,5 +1,4 @@
 
-
 var ApiMapper = require("apiMapper").ApiMapper;
 var apiMapper = new ApiMapper();
 
