@@ -1,0 +1,23 @@
+".container": {
+    backgroundColor: "white",
+    layout:'vertical',
+},
+".inner": {
+    top: '20dp',
+    width: '90%',
+    height: Ti.UI.SIZE,
+},
+"#lblname": {
+    width: '30%',
+    left: '0dp',
+},
+"#name": {
+    borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+    keyboardType: Titanium.UI.KEYBOARD_ASCII,
+    returnKeyType: Titanium.UI.RETURNKEY_DONE,
+    autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
+    hintText: 'お好きなユーザ名を入力',
+    maxLength: 20,
+    width: '70%',
+    right: '0dp',
+}

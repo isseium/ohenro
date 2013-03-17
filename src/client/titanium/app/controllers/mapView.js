@@ -1,10 +1,3 @@
-
-// Debug
-Alloy.Globals.user = new Object();
-Alloy.Globals.user.token = "00a5f7f7e7124313e12ca14efe8f5c81e59b7a15";
-
-
-
 // 呼び出し元からナビゲーションバーをセットする
 exports.setNavigation = function(nav){
     $.nav = nav;
@@ -14,7 +7,7 @@ exports.setNavigation = function(nav){
  * アノテーション（ピン）を配置する
  *
  * @TODO  引数がわかりにくいのでどこかで直す
- * @param array<mixed> data    スポットデータ
+ * @param array<mixed> spotData    スポットデータ
  *                      number :spot_id     スポットID
  *                      string :title       スポット名
  *                      string :description スポット概要
@@ -22,29 +15,27 @@ exports.setNavigation = function(nav){
  *                      number :longitude   経度
  * @return void
  */
-exports.setAnnotation = function(data){
-	for ( i = 0; i < data.length; i++) {
+exports.setAnnotation = function(spotData){
+    // 地図のアノテーションを削除
+    $.mymap.removeAllAnnotations();
+
+    for ( var i in spotData){
 		var annotation = Ti.Map.createAnnotation({
 		    myid: i,
-			latitude: data[i].latitude,
-			longitude: data[i].longitude,
-			title: data[i].title,
+			latitude: spotData[i].latitude,
+			longitude: spotData[i].longitude,
+			title: spotData[i].title,
 			animate: true,
-
+			pincolor: (spotData[i].checkin) ? Titanium.Map.ANNOTATION_GREEN : Titanium.Map.ANNOTATION_RED, // チェックイン履歴によってピン色を変える
 			// 任意プロパティ
-		    spot_id: data[i].spot_id,
-			mydescription: data[i].description,
+		    spot_id: spotData[i].spot_id,
+			mydescription: spotData[i].description,
+			comment: spotData[i].comment,
+			checkin: spotData[i].checkin,
+			checkin_time: spotData[i].checkin_time,
 		});
 		$.mymap.addAnnotation(annotation);
 	}
-
-    // 地図の中心を1つ目のスポットに設定（デバッグ用）
-    // TODO: 削除すること
-    var scrollTo1stSpot = function(){
-        var region = {latitude:data[0].latitude,longitude:data[0].longitude,animate:true,latitudeDelta:0.04, longitudeDelta:0.04};
-    	$.mymap.setLocation(region);
-    }
-    scrollTo1stSpot();
 };
 
 /**
@@ -61,6 +52,9 @@ $.mymap.addEventListener('click', function(e){
     		description: e.annotation.mydescription,                         // description というプロパティは予約されているので使えないみたい
     		spotPosition: {latitude: e.annotation.latitude, longitude: e.annotation.longitude},
     		currentPosition: Alloy.Globals.currentPosition,                  // 現在地情報
+    		comment: e.annotation.comment,
+    		checkin: e.annotation.checkin,
+    		checkin_time: e.annotation.checkin_time,
     	};
         var controller = Alloy.createController('checkin', args);
         var view = controller.getView();
@@ -70,18 +64,22 @@ $.mymap.addEventListener('click', function(e){
          */
         // var parentView =
         controller.setNavigation($.nav, view);
-        // view.setNavigation($.nav, parentView);
         view.title = e.annotation.title;
         $.nav.open(view);
     }
 });
 
-//テーブルビューをクリックし、名所の場所を表示
-// TODO: Typo だよ chenge => change
-exports.chengePoint = function(lat,lon){
+/**
+ * 指定した位置にズームする
+ */
+exports.zoomTo = function(lat,lon){
 	var region = {latitude:lat,longitude:lon,animate:true,latitudeDelta:0.04, longitudeDelta:0.04};
 	$.mymap.setLocation(region);
 };
+
+// 日本を俯瞰する状態をデフォルトにする
+scrollToOverheadView();
+
 
 // 定期的に現在地情報を取得し、Alloyのグローバル領域に設定する
 Ti.Geolocation.purpose = "For checkin";
@@ -97,20 +95,34 @@ Ti.Geolocation.addEventListener('location', function(){
     });
 });
 
-//現在地ボタンのイベント
-$.mapButtons.addEventListener('click', function(e){
-	switch(e.index){
-		case 0:
-            // 現在地を表示の中心にする
-            var regionCP = {
-                latitude: Alloy.Globals.currentPosition.latitude,
-                longitude: Alloy.Globals.currentPosition.longitude,
-                animate: true,
-                latitudeDelta: 0.04,
-                longitudeDelta: 0.04
-            };
-            // 現在地を地図の中心にする
-            $.mymap.setLocation(regionCP);
-            break;
-	}
-});
+/**
+ * 現在地を表示の中心にする
+ *
+ * @param  void
+ * @return void
+ */
+function scrollToCurrentPosition(){
+    $.mymap.setLocation({
+        latitude: Alloy.Globals.currentPosition.latitude,
+        longitude: Alloy.Globals.currentPosition.longitude,
+        animate: true,
+        latitudeDelta: 0.04,
+        longitudeDelta: 0.04
+    });
+}
+
+/**
+ * 全体が俯瞰できるPositionに変更する
+ *
+ * @param  void
+ * @return void
+ */
+function scrollToOverheadView(){
+    $.mymap.setLocation({
+        latitude: 38.591114,
+        longitude: 140.95459,
+        animate: true,
+        latitudeDelta: 4,
+        longitudeDelta: 4,
+    });
+}

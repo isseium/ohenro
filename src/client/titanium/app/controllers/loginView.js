@@ -1,77 +1,62 @@
 var ApiMapper = require("apiMapper").ApiMapper;
 var apiMapper = new ApiMapper();
-var fbSocial_type = 0;
 var TwSocial_type = 1;
+var fbSocial_type = 2;
 
+// コントローラ呼び出し元からナビゲーションバーをセットする
+exports.setNavigation = function(nav, parent){
+    $.nav = nav;
+    $.parent = parent;
+};
 
-Ti.Facebook.appid = 606983742650457;
-Ti.Facebook.permissions = ['publish_stream','read_stream'];
+var loginFacebook = function(e){
+    if(e.error){
+        alert(e.error);
+        return;
+    }else if(e.canceled){
+        return;
+    }
 
+    // アクセストークン取得
+    access_token = Ti.Facebook.getAccessToken(),
+
+    // 名前を取得して次の画面へ
+    Ti.Facebook.requestWithGraphPath(
+        'me?fields=username,picture',
+        {access_token: access_token},
+        "GET",
+        function(e) {
+            if (e.success) {
+                var obj = JSON.parse(e.result);
+
+                // 次の画面へ
+                var args = {
+                    social_token: access_token,
+                    username: obj.username,
+                    social_type: fbSocial_type,
+                    picture: obj.picture.data.url,
+                };
+            	var controller = Alloy.createController('join', args);
+            	var view = controller.getView();
+                controller.setNavigation($.nav, view);
+                view.title = "ユーザ登録";
+                $.nav.open(view);
+                $.nav.close($.parent);
+            }
+        }
+    );
+};
+
+// Facebook ログインボタン
 $.facebookButton.addEventListener('click', function() {
-	if (Ti.Facebook.loggedIn){
-	    var accTo = Titanium.Facebook.getAccessToken();
-	    // alert(accTo);
-	    var name = viewFbInfo(accTo);
-	    var social_secret = ''
-	    //ユーザ登録
-		userRegister(name,fbSocial_type,accTo,social_secret);
-	}else{
-	 	Titanium.Facebook.authorize();	
-	}
+    // ログインしているときはログアウト
+    if(Ti.Facebook.loggedIn){
+     	Ti.Facebook.logout();
+    }
+    Ti.Facebook.authorize();
 });
 
-var viewFbInfo = function(accTo){
-    Ti.Facebook.requestWithGraphPath(
-	    'me?fields=name,picture',
-	    {access_token:accTo},
-	    "GET",
-	    function(e) {
-	        if (e.success) {
-	            var obj = JSON.parse(e.result);
-	            // alert(obj.picture.data.url);
-	            // alert("Success: " + e.result);
-	            // $.image = "http://graph.facebook.com/"+obj.uid+"/picture";
-				var bfImage = Ti.UI.createImageView({
-					image:obj.picture.data.url,
-					width:100,
-					height:100,
-					top:200
-				});
-				$.loginView.add(bfImage);
-				
-				var fbName = Ti.UI.createLabel({
-					top:280,
-					text:obj.name
-				});
-				$.loginView.add(fbName);
-				$.facebookButton.hide();
-				return obj.name;
-	        }
-	    }
-	);	
-};
-
-/**
- * ユーザ登録
- */
-var userRegister = function(name,social_type,social_token,social_secret){
-	apiMapper.userregisterApi(
-		name,
-		social_type,
-		social_token,
-		social_secret,
-		function(){
-			// 成功したとき
-			var json = eval('(' + this.responseText + ')');
-			Alloy.Globals.user = json.user;		
-		},
-		function(e){
-			// 失敗したとき
-			alert(e.result + 'データの取得に失敗しました。');
-		}
-	);	
-};
-
+// Twitter ログインボタン
 $.twitterButton.addEventListener('click', function(e) {
 	Ti.include('twitter_api.js');
 	//initialization
@@ -79,5 +64,14 @@ $.twitterButton.addEventListener('click', function(e) {
 	    consumerKey:'8xXecpTnfVPYy8AaXvQAxA',
 	    consumerSecret:'p49btQOfliSk8ZZqGjG1Y8pRikB3SOSbjZDNUHsPk'
 	});
-	twitterApi.init(); 
+	twitterApi.init();
+});
+
+// ログイン後は、トークンのみを保持して、登録情報入力画面へ
+// FIXME: ログイン画面がたくさんでる。Ti.Facebook が
+Ti.Facebook.removeEventListener('login', loginFacebook);
+Ti.Facebook.addEventListener('login', loginFacebook);
+
+$.loginView.addEventListener('close', function(){
+    Ti.Facebook.removeEventListener('login', loginFacebook);
 });

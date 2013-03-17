@@ -1,0 +1,14 @@
+"#scrollToCurrentPosition" : {
+    image: "target_icon&48.png",
+    width: "32dp",
+    height: "32dp",
+    left: 10,
+    bottom: 10,
+},
+"#scrollToOverheadView" : {
+    image: "zoom_icon&48.png",
+    width: "32dp",
+    height: "32dp",
+    left: 52,
+    bottom: 10,
+},

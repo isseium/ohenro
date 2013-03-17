@@ -125,7 +125,14 @@ class Action_Register_user extends Frapi_Action implements Frapi_Action_Interfac
                     $msg = "your name was already used => " . $param["name"];
                     $code = "0001";
             }
-            return array("meta" => array("status" => "false", "message" => $msg, "code" => $code));
+            // throw new Frapi_Error("Error", "Error2", 403);
+            // throw new Exception(array("meta" => array("status" => "false", "message" => $msg, "code" => $code)), 403);
+            return new Frapi_Response(
+                array(
+                    "code" => 409,
+                    "data" => array("meta" => array("status" => "false", "message" => $msg, "code" => $code))
+                )
+            );
         }
     }
 

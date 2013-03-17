@@ -84,6 +84,8 @@ class Action_User_my extends Frapi_Action implements Frapi_Action_Interface
         $response = array(
             "id" => $user->id,
             "name" => $user->name,
+            "created_at" => $user->created_at,
+            "updated_at" => $user->updated_at,
             "social" => array(),
         );
         foreach($socialAccount as $s){
