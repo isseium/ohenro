@@ -42,6 +42,7 @@ exports.setAnnotation = function(spotData){
 			animate: true,
 			pincolor: (spotData[i].checkin) ? Titanium.Map.ANNOTATION_GREEN : Titanium.Map.ANNOTATION_RED, // チェックイン履歴によってピン色を変える
 			rightButton: Titanium.UI.iPhone.SystemButton.DISCLOSURE,
+			bubbleParent: false,             // タップ時に後ろのピンをタップすることを防ぐ
 			// 任意プロパティ
 		    spot_id: spotData[i].spot_id,
 			mydescription: spotData[i].description,
