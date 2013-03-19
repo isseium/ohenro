@@ -7,6 +7,7 @@
  *
  * @todo    コントローラ名からViewを取り除く
  * @todo    Modelを利用してコントローラを小さくする
+ * @todo    インデントを 4スペースに変更する
  *
  */
 
@@ -39,6 +40,7 @@ exports.setAnnotation = function(spotData){
 			latitude: spotData[i].latitude,
 			longitude: spotData[i].longitude,
 			title: spotData[i].title,
+			subtitle: spotData[i].comment,
 			animate: true,
 			pincolor: (spotData[i].checkin) ? Titanium.Map.ANNOTATION_GREEN : Titanium.Map.ANNOTATION_RED, // チェックイン履歴によってピン色を変える
 			rightButton: Titanium.UI.iPhone.SystemButton.DISCLOSURE,

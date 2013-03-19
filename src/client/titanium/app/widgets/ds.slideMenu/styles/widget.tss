@@ -24,7 +24,7 @@
 },
 "#mymap": {
 	touchEnabled:"false"
-	
+
 },
 "#nav": {
 	left : "0",

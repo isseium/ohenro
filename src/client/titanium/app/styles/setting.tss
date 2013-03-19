@@ -1,3 +1,6 @@
+"Window": {
+    barColor: 'black',
+},
 ".container": {
     backgroundColor: 'white',
 	layout:'vertical',

@@ -255,8 +255,9 @@ function initView(){
 $.ds.setting.addEventListener('click', function(){
     var controller = Alloy.createController('setting');
     var win = controller.getView();
-    $.ds.nav.open(win);
+    win.title = "設定";
     $.ds.nav.title = '設定';
+    $.ds.nav.open(win);
 });
 
 $.ds.signup.addEventListener('click', function(){
