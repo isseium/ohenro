@@ -350,17 +350,21 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod, par
             var responseParams = OAuth.getParameterMap(client.responseText);
             accessToken = responseParams['oauth_token'];
             accessTokenSecret = responseParams['oauth_token_secret'];
-            
-             //<---- add  
-            var user_id = responseParams['user_id'];                                  
-            var screen_name = responseParams['screen_name'];                          
-            Ti.App.Properties.setString('user_id',user_id);                           
-            Ti.App.Properties.setString('screen_name',screen_name);                   
-            Ti.API.info("------------------------ in getAccessToken");              
-            Ti.API.info("get user_id from resonseParams*"+user_id);                   
+
+             //<---- add
+             // TODO: もっとエレガントな方法求む
+             Alloy.Globals.setTwitterAccount(responseParams);
+             /*
+            var user_id = responseParams['user_id'];
+            var screen_name = responseParams['screen_name'];
+            Ti.App.Properties.setString('user_id',user_id);
+            Ti.App.Properties.setString('screen_name',screen_name);
+            Ti.API.info("------------------------ in getAccessToken");
+            Ti.API.info("get user_id from resonseParams*"+user_id);
             Ti.API.info("get screen_name from responseParams*"+screen_name);
-            //----->add end     
-            
+            */
+            //----->add end
+
             Ti.API.debug('*** get access token, Response: ' + client.responseText);
             processQueue();
             destroyAuthorizeUI();

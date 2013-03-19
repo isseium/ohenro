@@ -27,7 +27,47 @@ for(var i=0; i<Alloy.Globals.user.social.length; i++){
 }
 
 // Twitterボタン
+// XXX: 認証を途中で終わらせるとスイッチがONなのに、ONになっていない現象が発生する
 $.switch_twitter.addEventListener('change', function(e){
+    if(e.source.value){
+        // ON のとき
+    	Ti.include('twitter_api.js');
+
+    	//initialization
+    	var twitterApi = new TwitterApi({
+    	    consumerKey:'8xXecpTnfVPYy8AaXvQAxA',
+    	    consumerSecret:'p49btQOfliSk8ZZqGjG1Y8pRikB3SOSbjZDNUHsPk'
+    	});
+
+
+    	// TODO: エレガントな方法もとむ
+    	// コールバックができなかったので
+    	// oauth_adapter.js の getAccessToken メソッドにて、Alloy.Globals.setTwitterAccount() を直に書いてコールしている
+    	Alloy.Globals.setTwitterAccount = function(responseParams){
+    	    twitterApi.account_verify_credentials({
+    	        onSuccess: function(e){
+                    // 更新
+                    updateSocialSetting(e.source, 1, responseParams['oauth_token'], responseParams['oauth_token_secret'], 1);
+                    twitterApi.clear_accesstoken();
+                },
+    	        onError: function(){
+    	            alert('認証に失敗しました');
+                    $.switch_twitter.value = false;
+    	            twitterApi.clear_accesstoken();
+    	        }
+    	    });
+    	};
+
+        // 認証
+        twitterApi.init({
+            onError: function(){
+                $.switch_twitter.value = false;
+            }
+        });
+    }else{
+        // OFF のときは更新
+        updateSocialSetting(e.source.value, 1, null, null, 0);
+    }
     // TODO: Twitter 版も作る
 });
 

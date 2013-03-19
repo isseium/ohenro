@@ -1,3 +1,10 @@
+
+// インターネット接続上京を確認
+if(!Titanium.Network.online){
+    // ネットワークにつながっていないときはアラートを発して終了
+    alert('インターネットへの接続に失敗しました。電波状況のよいところで再度お試し下さい。');
+}
+
 // APIMapper の準備
 var ApiMapper = require("apiMapper").ApiMapper;
 
@@ -216,8 +223,9 @@ function loadSpot(){
                         mapView.setAnnotation(spotData);
                         setTableData(spotData);
                     } ,
-                    function(){
+                    function(e){
                         alert('データの取得に失敗しました。 [userMy]');
+                        Ti.API.info(this.responseText);
             		    // マスタデータのみ表示
                         mapView.setAnnotation(spotData);
                         setTableData(spotData);

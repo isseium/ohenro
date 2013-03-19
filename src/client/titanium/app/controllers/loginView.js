@@ -59,12 +59,47 @@ $.facebookButton.addEventListener('click', function() {
 // Twitter ログインボタン
 $.twitterButton.addEventListener('click', function(e) {
 	Ti.include('twitter_api.js');
+
 	//initialization
 	var twitterApi = new TwitterApi({
 	    consumerKey:'8xXecpTnfVPYy8AaXvQAxA',
 	    consumerSecret:'p49btQOfliSk8ZZqGjG1Y8pRikB3SOSbjZDNUHsPk'
 	});
-	twitterApi.init();
+
+
+	// TODO: エレガントな方法もとむ
+	// コールバックができなかったので
+	// oauth_adapter.js の getAccessToken メソッドにて、Alloy.Globals.setTwitterAccount() を直に書いてコールしている
+	Alloy.Globals.setTwitterAccount = function(responseParams){
+	    twitterApi.account_verify_credentials({
+	        onSuccess: function(e){
+                // 次の画面へ
+                var args = {
+                    social_token: responseParams['oauth_token'],
+                    social_secret: responseParams['oauth_token_secret'],
+                    username: responseParams['screen_name'],
+                    social_type: TwSocial_type,
+                    picture: e['profile_image_url'],
+                };
+                twitterApi.clear_accesstoken();
+
+                // TODO: 冗長なので綺麗にしたい
+                var controller = Alloy.createController('join', args);
+                var view = controller.getView();
+                controller.setNavigation($.nav, view);
+                view.title = "ユーザ登録";
+                $.nav.open(view);
+                $.nav.close($.parent);
+            },
+	        onError: function(){
+	            alert('認証に失敗しました');
+	            twitterApi.clear_accesstoken();
+	        }
+	    });
+	};
+
+    // 認証
+    twitterApi.init();
 });
 
 // ログイン後は、トークンのみを保持して、登録情報入力画面へ
