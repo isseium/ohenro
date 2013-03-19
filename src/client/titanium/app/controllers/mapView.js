@@ -35,12 +35,19 @@ exports.setAnnotation = function(spotData){
     $.mymap.removeAllAnnotations();
 
     for ( var i in spotData){
+        // チェックインコメントを整形
+        var checkin_comment = "未チェックイン"
+        if(typeof spotData[i].comment !== "undefined"){
+            checkin_comment = "[" + spotData[i].checkin_time + "]" + spotData[i].comment;
+        }
+
+        // アノテーション作成
 		var annotation = Ti.Map.createAnnotation({
 		    myid: i,
 			latitude: spotData[i].latitude,
 			longitude: spotData[i].longitude,
 			title: spotData[i].title,
-			subtitle: spotData[i].comment,
+			subtitle: checkin_comment,
 			animate: true,
 			pincolor: (spotData[i].checkin) ? Titanium.Map.ANNOTATION_GREEN : Titanium.Map.ANNOTATION_RED, // チェックイン履歴によってピン色を変える
 			rightButton: Titanium.UI.iPhone.SystemButton.DISCLOSURE,
