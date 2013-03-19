@@ -45,7 +45,6 @@ if( isUserLogined() &&
         $.comment.value = "チェックインをするにはログインする必要があります";
         alert('チェックインするにはユーザ登録が必要です');
     }
-    }
 
     $.comment.touchEnabled = false;
     $.comment.opacity = 0.70;
