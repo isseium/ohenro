@@ -43,6 +43,8 @@ if( isUserLogined() &&
         }
     }else{
         $.comment.value = "チェックインをするにはログインする必要があります";
+        alert('チェックインするにはユーザ登録が必要です');
+    }
     }
 
     $.comment.touchEnabled = false;

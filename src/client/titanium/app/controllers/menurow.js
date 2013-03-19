@@ -10,6 +10,6 @@ if(args.checkin){
 $.title.text = args.title || '';
 
 // 任意プロパティ
-$.row.customTitle = $.title;
+$.row.customTitle = args.title;
 $.row.customLat = args.latitude;
 $.row.customLon = args.longitude;

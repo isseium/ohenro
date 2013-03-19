@@ -20,8 +20,6 @@ $.ds.innerwin.addEventListener('focus', function(){
     if(Alloy.Globals.user.token){
         initUser();
         initView();
-    }else{
-        alert('チェックインするにはユーザ登録が必要です');
     }
 
     loadSpot();
@@ -134,6 +132,7 @@ function setTableData(spotData){
  */
 $.ds.tableView.addEventListener('click', function selectRow(e) {
     mapView.zoomTo(e.rowData.customLat, e.rowData.customLon);
+    mapView.selectAnnotation(e.rowData.customTitle);      // ピンを選択して、ラベルを表示する
     $.ds.toggleSlider();   // メニューを閉じる
 });
 

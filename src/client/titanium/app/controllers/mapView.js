@@ -92,6 +92,13 @@ exports.zoomTo = function(lat,lon){
 	$.mymap.setLocation(region);
 };
 
+/**
+ * 指定したアノテーション（pin) のラベルを表示させる
+ */
+exports.selectAnnotation = function(annotation){
+    $.mymap.selectAnnotation(annotation);
+};
+
 // 日本を俯瞰する状態をデフォルトにする
 scrollToOverheadView();
 
