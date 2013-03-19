@@ -1,3 +1,17 @@
+/**
+ * mapView.js
+ *
+ * 地図表示関連をコントロールする
+ *
+ * @author ganezasan, isseium
+ *
+ * @todo    コントローラ名からViewを取り除く
+ * @todo    Modelを利用してコントローラを小さくする
+ *
+ */
+
+
+
 // 呼び出し元からナビゲーションバーをセットする
 exports.setNavigation = function(nav){
     $.nav = nav;
@@ -27,6 +41,7 @@ exports.setAnnotation = function(spotData){
 			title: spotData[i].title,
 			animate: true,
 			pincolor: (spotData[i].checkin) ? Titanium.Map.ANNOTATION_GREEN : Titanium.Map.ANNOTATION_RED, // チェックイン履歴によってピン色を変える
+			rightButton: Titanium.UI.iPhone.SystemButton.DISCLOSURE,
 			// 任意プロパティ
 		    spot_id: spotData[i].spot_id,
 			mydescription: spotData[i].description,
@@ -44,7 +59,7 @@ exports.setAnnotation = function(spotData){
 $.mymap.addEventListener('click', function(e){
     // ピンのタイトルをタップしたときに checkin 画面表示
     // refs. http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.Map-method-createAnnotation
-    if (e.clicksource == 'title'){
+    if (e.clicksource == 'title' || e.clicksource == 'rightButton'){
     	var args = {
     	    spot_id: e.annotation.spot_id,
     		title : e.annotation.title,
