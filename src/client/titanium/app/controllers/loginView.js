@@ -62,7 +62,7 @@ $.twitterButton.addEventListener('click', function(e) {
 
 	//initialization
 	var twitterApi = new TwitterApi({
-	    consumerKey: Alloy.Globals.app.twitter_cosumer_token,
+	    consumerKey: Alloy.Globals.app.twitter_consumer_token,
 	    consumerSecret:Alloy. Globals.app.twitter_consumer_secret,
 	});
 
@@ -81,7 +81,6 @@ $.twitterButton.addEventListener('click', function(e) {
                     social_type: TwSocial_type,
                     picture: e['profile_image_url'],
                 };
-                twitterApi.clear_accesstoken();
 
                 // TODO: 冗長なので綺麗にしたい
                 var controller = Alloy.createController('join', args);
