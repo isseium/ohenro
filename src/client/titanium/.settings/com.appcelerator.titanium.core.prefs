@@ -1,0 +1,17 @@
+eclipse.preferences.version=1
+provisioning_profiles/development/02AF5E21-C50F-4ADF-A532-758C29655DF3/appid=*
+provisioning_profiles/development/02AF5E21-C50F-4ADF-A532-758C29655DF3/filepath=/Users/issei/Library/MobileDevice/Provisioning Profiles/02AF5E21-C50F-4ADF-A532-758C29655DF3.mobileprovision
+provisioning_profiles/development/02AF5E21-C50F-4ADF-A532-758C29655DF3/name=iOS Team Provisioning Profile\: Xcode iOS Wildcard App ID
+provisioning_profiles/development/02AF5E21-C50F-4ADF-A532-758C29655DF3/uuid=02AF5E21-C50F-4ADF-A532-758C29655DF3
+provisioning_profiles/development/0F63330E-578A-41E2-9F6E-5BCDA5BD44E9/appid=com.cheek-it.PushTest
+provisioning_profiles/development/0F63330E-578A-41E2-9F6E-5BCDA5BD44E9/filepath=/Users/issei/Library/MobileDevice/Provisioning Profiles/PushTest.mobileprovision
+provisioning_profiles/development/0F63330E-578A-41E2-9F6E-5BCDA5BD44E9/name=PushTest
+provisioning_profiles/development/0F63330E-578A-41E2-9F6E-5BCDA5BD44E9/uuid=0F63330E-578A-41E2-9F6E-5BCDA5BD44E9
+provisioning_profiles/development/1EA28E67-53CD-44C9-BAB2-1C3CC38B2AF7/appid=net.ikmz.test.ohenro
+provisioning_profiles/development/1EA28E67-53CD-44C9-BAB2-1C3CC38B2AF7/filepath=/Users/issei/Library/MobileDevice/Provisioning Profiles/1EA28E67-53CD-44C9-BAB2-1C3CC38B2AF7.mobileprovision
+provisioning_profiles/development/1EA28E67-53CD-44C9-BAB2-1C3CC38B2AF7/name=OhenroTest
+provisioning_profiles/development/1EA28E67-53CD-44C9-BAB2-1C3CC38B2AF7/uuid=1EA28E67-53CD-44C9-BAB2-1C3CC38B2AF7
+provisioning_profiles/development/4B9E14B3-4B17-4F50-9F70-8D76D4A8A359/appid=net.ikmz.test.ohenro
+provisioning_profiles/development/4B9E14B3-4B17-4F50-9F70-8D76D4A8A359/filepath=/Users/issei/Library/MobileDevice/Provisioning Profiles/4B9E14B3-4B17-4F50-9F70-8D76D4A8A359.mobileprovision
+provisioning_profiles/development/4B9E14B3-4B17-4F50-9F70-8D76D4A8A359/name=Ohenro
+provisioning_profiles/development/4B9E14B3-4B17-4F50-9F70-8D76D4A8A359/uuid=4B9E14B3-4B17-4F50-9F70-8D76D4A8A359
