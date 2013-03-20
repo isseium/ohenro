@@ -28,15 +28,18 @@ foreach($shares as $s ){
         $token_access->setTokenSecret($secret);
 
 
-        $client = $token_access->getHttpClient($config_array["share"]["tw"]);
+        try {
+            $client = $token_access->getHttpClient($config_array["share"]["tw"]);
 
-        $client->setUri('https://api.twitter.com/1.1/statuses/update.json');
-        $client->setMethod(Zend_Http_Client::POST);
-        $client->setParameterPost('status', $s["message"]);
-        $response = $client->request();
-        // TODO: エラーハンドリング
-        // $data = Zend_Json::decode($response->getBody());
-        // $result = $response->getBody();
+            $client->setUri('https://api.twitter.com/1.1/statuses/update.json');
+            $client->setMethod(Zend_Http_Client::POST);
+            $client->setParameterPost('status', $s["message"]);
+            $response = $client->request();
+            // $data = Zend_Json::decode($response->getBody());
+            // $result = $response->getBody();
+        } catch (Exception $e){
+            ShareQueue::changeStatus($s["queue_id"], 9);
+        }
     }
 
     // Facebook
@@ -55,7 +58,11 @@ foreach($shares as $s ){
         $client->setMethod(Zend_Http_Client::POST);
         $client->setParameterPost('access_token', $token);
         $client->setParameterPost('message', $s["message"]);
-        $response = $client->request();
+        try {
+            $response = $client->request();
+        } catch (Exception $e){
+            ShareQueue::changeStatus($s["queue_id"], 9);
+        }
         // TODO: エラーハンドリング
         // $data = Zend_Json::decode($response->getBody());
         // $result = $response->getBody();
