@@ -1,4 +1,3 @@
-
 // インターネット接続上京を確認
 if(!Titanium.Network.online){
     // ネットワークにつながっていないときはアラートを発して終了
@@ -10,7 +9,7 @@ var ApiMapper = require("apiMapper").ApiMapper;
 
 // Facebook Consumer Token & Secret
 // TODO: あとで別ファイル管理にする
-Ti.Facebook.appid = 606983742650457;
+Ti.Facebook.appid = Alloy.Globals.app.facebook_appid;
 Ti.Facebook.permissions = ['publish_stream','read_stream'];
 
 // ユーザ情報を設定する
