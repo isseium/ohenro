@@ -9,3 +9,6 @@
 // object. For example:
 //
 // Alloy.Globals.someGlobalFunction = function(){};
+
+// アプリケーション情報を設定
+Ti.include("app_config.js");

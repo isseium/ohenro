@@ -35,10 +35,9 @@ $.switch_twitter.addEventListener('change', function(e){
 
     	//initialization
     	var twitterApi = new TwitterApi({
-    	    consumerKey:'8xXecpTnfVPYy8AaXvQAxA',
-    	    consumerSecret:'p49btQOfliSk8ZZqGjG1Y8pRikB3SOSbjZDNUHsPk'
+    	    consumerKey: Alloy.Globals.app.twitter_cosumer_token,
+    	    consumerSecret:Alloy. Globals.app.twitter_consumer_secret,
     	});
-
 
     	// TODO: エレガントな方法もとむ
     	// コールバックができなかったので
