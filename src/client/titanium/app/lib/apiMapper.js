@@ -66,7 +66,7 @@ apiMapper.accessApi(
 
 ApiMapper = function(){};
 //ApiMapper.prototype.apiEndpoint = "http://aoyama.cheek-it.com/api";
-ApiMapper.prototype.apiEndpoint = "http://ohenro.test.cheekit.com/api";
+ApiMapper.prototype.apiEndpoint = Alloy.Globals.app.api_endpoint;
 ApiMapper.prototype.accessApi = function(method, uri, param, callback_success, callback_failure) {
 
 		// オフラインなら失敗
