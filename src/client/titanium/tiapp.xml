@@ -6,13 +6,13 @@
     <property name="acs-oauth-secret-development" type="string">1yoZwPX9bWfOucE54QASiqXbvcwCDkde</property>
     <property name="acs-oauth-key-development" type="string">tdK1SCCcZ4Y1hkCFhdcwo4LPKfW0aDpm</property>
     <property name="acs-api-key-development" type="string">EFzOS8c28vncoCHuo7gfuMcaMjAJxMQo</property>
-    <id>com.cheekit.ohenro</id>
+    <id>net.ikmz.test.ohenro</id>
     <name>ohenro</name>
     <version>1.0</version>
     <publisher>itoutakayuki</publisher>
     <url>http://cheek-it.com</url>
-    <description>not specified</description>
-    <copyright>2013 by itoutakayuki</copyright>
+    <description>Ohenro</description>
+    <copyright>2013 by cheekit</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>false</prerendered-icon>

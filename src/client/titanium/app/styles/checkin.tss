@@ -1,5 +1,6 @@
 ".container": {
     backgroundColor: 'white',
+    barColor: 'black',
 	layout:'vertical',
 },
 "#scrollView": {

@@ -1,3 +1,10 @@
+
+// インターネット接続上京を確認
+if(!Titanium.Network.online){
+    // ネットワークにつながっていないときはアラートを発して終了
+    alert('インターネットへの接続に失敗しました。電波状況のよいところで再度お試し下さい。');
+}
+
 // APIMapper の準備
 var ApiMapper = require("apiMapper").ApiMapper;
 
@@ -20,8 +27,6 @@ $.ds.innerwin.addEventListener('focus', function(){
     if(Alloy.Globals.user.token){
         initUser();
         initView();
-    }else{
-        alert('チェックインするにはユーザ登録が必要です');
     }
 
     loadSpot();
@@ -134,6 +139,7 @@ function setTableData(spotData){
  */
 $.ds.tableView.addEventListener('click', function selectRow(e) {
     mapView.zoomTo(e.rowData.customLat, e.rowData.customLon);
+    mapView.selectAnnotation(e.rowData.customTitle);      // ピンを選択して、ラベルを表示する
     $.ds.toggleSlider();   // メニューを閉じる
 });
 
@@ -217,8 +223,9 @@ function loadSpot(){
                         mapView.setAnnotation(spotData);
                         setTableData(spotData);
                     } ,
-                    function(){
+                    function(e){
                         alert('データの取得に失敗しました。 [userMy]');
+                        Ti.API.info(this.responseText);
             		    // マスタデータのみ表示
                         mapView.setAnnotation(spotData);
                         setTableData(spotData);
@@ -256,8 +263,9 @@ function initView(){
 $.ds.setting.addEventListener('click', function(){
     var controller = Alloy.createController('setting');
     var win = controller.getView();
-    $.ds.nav.open(win);
+    win.title = "設定";
     $.ds.nav.title = '設定';
+    $.ds.nav.open(win);
 });
 
 $.ds.signup.addEventListener('click', function(){

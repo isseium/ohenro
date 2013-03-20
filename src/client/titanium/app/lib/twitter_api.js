@@ -13,7 +13,7 @@ var TwitterApi = function(params) {
     var consumerKey = params.consumerKey;
     var signatureMethod = params.signatureMethod || 'HMAC-SHA1';
 
-    // Do not use queue feature of oAuthAdapter on Android. 
+    // Do not use queue feature of oAuthAdapter on Android.
     // it causes "sending message to a Handler on a dead thread" issue.
     this.oAuthAdapter = new OAuthAdapter(consumerSecret, consumerKey, signatureMethod, {
         useQueue: false
@@ -37,7 +37,7 @@ var TwitterApi = function(params) {
         }
     };
     this._callApi = function(params) {
-        // replace :var in url to params.var 
+        // replace :var in url to params.var
         var match = params.url.match(/:[^\/\.]+/g);
         if (match) {
             for (var i = 0; i < match.length; i++) {
@@ -116,7 +116,7 @@ var TwitterApi = function(params) {
     this.clear_actionsqueue = function() {
         self.oAuthAdapter.clearActionsQueue();
     };
-    
+
     // Verify if the user is logged on Twitter.
     this.isAuthorized = function() {
 
@@ -133,7 +133,7 @@ var TwitterApi = function(params) {
 
     /**
     Twitter APIs
-    We can use same parameter of Twitter API. 
+    We can use same parameter of Twitter API.
     see http://dev.twitter.com/doc
     Additional params for all APIs.
      params.onSuccess(response)
@@ -302,8 +302,8 @@ var TwitterApi = function(params) {
         return self.callApi(params);
     };
 
-    //user/lists_create 
-    //Creates a new list for the authenticated user. 
+    //user/lists_create
+    //Creates a new list for the authenticated user.
     this.user_lists_create = function(params) {
         params.url = 'https://api.twitter.com/1/:user/lists.json';
         params.method = 'POST';
@@ -321,7 +321,7 @@ var TwitterApi = function(params) {
         params.method = 'GET';
     };
     // :user/lists/:id
-    // Show the specified list. 
+    // Show the specified list.
     this.user_lists_get = function(params) {
         params.url = 'https://api.twitter.com/1/:user/lists/:id.json';
         params.method = 'GET';
@@ -404,7 +404,7 @@ var TwitterApi = function(params) {
 
     //account/verify_credentials
     this.account_verify_credentials = function(params) {
-        params.url = 'https://api.twitter.com/1/account/verify_credentials.json';
+        params.url = 'https://api.twitter.com/1.1/account/verify_credentials.json';
         params.method = 'GET';
         return self.callApi(params);
     };

@@ -35,10 +35,13 @@ class SpotManager extends OhenroBase {
 
         $rows = $db->fetchAll($select);
 
+        /*
+         * TODO: 初期登録したユーザが必ずエラーになってしまうので一時コメント化
         if(!$rows){
             // TODO: エラー管理
             throw new Exception(sprintf('Invalid checkin id [id=%s]', $checkin_id));
         }
+         */
 
         // TODO: 一部データ返却できていません
         $spots = array();

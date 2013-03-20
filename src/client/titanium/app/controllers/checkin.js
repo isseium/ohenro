@@ -43,6 +43,7 @@ if( isUserLogined() &&
         }
     }else{
         $.comment.value = "チェックインをするにはログインする必要があります";
+        alert('チェックインするにはユーザ登録が必要です');
     }
 
     $.comment.touchEnabled = false;
@@ -125,7 +126,7 @@ function isSpotNear(myLat, myLon, spotLat, spotLon, baseDistance){
  * @return boolean true: ログイン済み, false: 未ログイン
  */
 function isUserLogined(){
-    if(typeof Alloy.Globals.user === "undefined"){
+    if(typeof Alloy.Globals.user.token === "undefined"){
         return false;
     }
 

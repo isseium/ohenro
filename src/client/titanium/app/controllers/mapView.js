@@ -1,3 +1,18 @@
+/**
+ * mapView.js
+ *
+ * 地図表示関連をコントロールする
+ *
+ * @author ganezasan, isseium
+ *
+ * @todo    コントローラ名からViewを取り除く
+ * @todo    Modelを利用してコントローラを小さくする
+ * @todo    インデントを 4スペースに変更する
+ *
+ */
+
+
+
 // 呼び出し元からナビゲーションバーをセットする
 exports.setNavigation = function(nav){
     $.nav = nav;
@@ -20,13 +35,23 @@ exports.setAnnotation = function(spotData){
     $.mymap.removeAllAnnotations();
 
     for ( var i in spotData){
+        // チェックインコメントを整形
+        var checkin_comment = "未チェックイン"
+        if(typeof spotData[i].comment !== "undefined"){
+            checkin_comment = "[" + spotData[i].checkin_time + "]" + spotData[i].comment;
+        }
+
+        // アノテーション作成
 		var annotation = Ti.Map.createAnnotation({
 		    myid: i,
 			latitude: spotData[i].latitude,
 			longitude: spotData[i].longitude,
 			title: spotData[i].title,
+			subtitle: checkin_comment,
 			animate: true,
 			pincolor: (spotData[i].checkin) ? Titanium.Map.ANNOTATION_GREEN : Titanium.Map.ANNOTATION_RED, // チェックイン履歴によってピン色を変える
+			rightButton: Titanium.UI.iPhone.SystemButton.DISCLOSURE,
+			bubbleParent: false,             // タップ時に後ろのピンをタップすることを防ぐ
 			// 任意プロパティ
 		    spot_id: spotData[i].spot_id,
 			mydescription: spotData[i].description,
@@ -44,7 +69,7 @@ exports.setAnnotation = function(spotData){
 $.mymap.addEventListener('click', function(e){
     // ピンのタイトルをタップしたときに checkin 画面表示
     // refs. http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.Map-method-createAnnotation
-    if (e.clicksource == 'title'){
+    if (e.clicksource == 'title' || e.clicksource == 'rightButton'){
     	var args = {
     	    spot_id: e.annotation.spot_id,
     		title : e.annotation.title,
@@ -75,6 +100,13 @@ $.mymap.addEventListener('click', function(e){
 exports.zoomTo = function(lat,lon){
 	var region = {latitude:lat,longitude:lon,animate:true,latitudeDelta:0.04, longitudeDelta:0.04};
 	$.mymap.setLocation(region);
+};
+
+/**
+ * 指定したアノテーション（pin) のラベルを表示させる
+ */
+exports.selectAnnotation = function(annotation){
+    $.mymap.selectAnnotation(annotation);
 };
 
 // 日本を俯瞰する状態をデフォルトにする

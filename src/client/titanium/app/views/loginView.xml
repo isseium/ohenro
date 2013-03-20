@@ -1,5 +1,6 @@
 <Alloy>
-	<Window id="loginView" title="ログイン">
+    <!-- TODO: tss に分離 -->
+	<Window id="loginView" title="ユーザ登録">
 		<View>
 			<ImageView id="image" top="30" left="30"/>
 			<Label id="name" top="45" left="80" width="200" height="35"/>
