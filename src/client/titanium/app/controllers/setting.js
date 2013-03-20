@@ -33,11 +33,14 @@ $.switch_twitter.addEventListener('change', function(e){
         // ON のとき
     	Ti.include('twitter_api.js');
 
-    	//initialization
-    	var twitterApi = new TwitterApi({
-    	    consumerKey: Alloy.Globals.app.twitter_cosumer_token,
-    	    consumerSecret:Alloy. Globals.app.twitter_consumer_secret,
-    	});
+        //initialization
+        var twitterApi = new TwitterApi({
+            consumerKey: Alloy.Globals.app.twitter_consumer_token,
+            consumerSecret:Alloy. Globals.app.twitter_consumer_secret,
+        });
+
+        // いったん初期化
+        twitterApi.clear_accesstoken();
 
     	// TODO: エレガントな方法もとむ
     	// コールバックができなかったので
@@ -47,27 +50,20 @@ $.switch_twitter.addEventListener('change', function(e){
     	        onSuccess: function(e){
                     // 更新
                     updateSocialSetting(e.source, 1, responseParams['oauth_token'], responseParams['oauth_token_secret'], 1);
-                    twitterApi.clear_accesstoken();
                 },
     	        onError: function(){
     	            alert('認証に失敗しました');
                     $.switch_twitter.value = false;
-    	            twitterApi.clear_accesstoken();
     	        }
     	    });
     	};
 
         // 認証
-        twitterApi.init({
-            onError: function(){
-                $.switch_twitter.value = false;
-            }
-        });
+        twitterApi.init();
     }else{
         // OFF のときは更新
         updateSocialSetting(e.source.value, 1, null, null, 0);
     }
-    // TODO: Twitter 版も作る
 });
 
 // Facebookボタン
