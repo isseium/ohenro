@@ -10,5 +10,11 @@
 //
 // Alloy.Globals.someGlobalFunction = function(){};
 
-// アプリケーション情報を設定
+// アプリケーション情報を設定（環境別）
 Ti.include("app_config.js");
+
+// アプリケーション固定情報
+
+// Center
+Alloy.Globals.app.overview_lat = 38.591114;
+Alloy.Globals.app.overview_lon = 140.95459;

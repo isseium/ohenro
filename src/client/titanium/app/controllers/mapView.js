@@ -151,8 +151,8 @@ function scrollToCurrentPosition(){
  */
 function scrollToOverheadView(){
     $.mymap.setLocation({
-        latitude: 38.591114,
-        longitude: 140.95459,
+        latitude: Alloy.Globals.app.overview_lat,
+        longitude: Alloy.Globals.app.overview_lon,
         animate: true,
         latitudeDelta: 4,
         longitudeDelta: 4,

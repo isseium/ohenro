@@ -23,7 +23,7 @@ mapView.setNavigation($.ds.nav);    // Navigationバーのセット
 // 地図画面に戻るたびに、情報を更新する
 $.ds.innerwin.addEventListener('focus', function(){
     // token が含まれているときは情報更新を試みる
-    if(Alloy.Globals.user.token){
+    if(typeof Alloy.Globals.user !== 'undefined' && Alloy.Globals.user.token){
         initUser();
         initView();
     }
