@@ -61,7 +61,9 @@ class User extends OhenroBase {
 
         $result = 0;
         foreach($socialAccounts as $s){
-            $result |= $s->social_type;
+            if($s->share == 1){
+                $result |= $s->social_type;
+            }
         }
 
         return $result;
