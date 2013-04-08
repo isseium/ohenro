@@ -137,6 +137,13 @@ function setTableData(spotData){
  * タップしたスポットを中心に表示する
  */
 $.ds.tableView.addEventListener('click', function selectRow(e) {
+    // インターネット接続状況を確認
+    if(!Titanium.Network.online){
+        // ネットワークにつながっていないときはアラートを発して終了
+        alert('インターネットへの接続に失敗しました。電波状況のよいところで再度お試し下さい。');
+        return;
+    }
+
     mapView.zoomTo(e.rowData.customLat, e.rowData.customLon);
     mapView.selectAnnotation(e.rowData.customTitle);      // ピンを選択して、ラベルを表示する
     $.ds.toggleSlider();   // メニューを閉じる
@@ -260,6 +267,12 @@ function initView(){
 }
 
 $.ds.setting.addEventListener('click', function(){
+    if(!Titanium.Network.online){
+        // ネットワークにつながっていないときはアラートを発して終了
+        alert('インターネットへの接続に失敗しました。電波状況のよいところで再度お試し下さい。');
+        return;
+    }
+
     var controller = Alloy.createController('setting');
     var win = controller.getView();
     win.title = "設定";
@@ -268,6 +281,12 @@ $.ds.setting.addEventListener('click', function(){
 });
 
 $.ds.signup.addEventListener('click', function(){
+    if(!Titanium.Network.online){
+        // ネットワークにつながっていないときはアラートを発して終了
+        alert('インターネットへの接続に失敗しました。電波状況のよいところで再度お試し下さい。');
+        return;
+    }
+
     var controller = Alloy.createController('loginView');
     var win = controller.getView();
     controller.setNavigation($.ds.nav, win);
