@@ -18,12 +18,12 @@ for(var i=0; i<Alloy.Globals.user.social.length; i++){
         case "1":
             // Twitter
             $.switch_twitter.value = Alloy.Globals.user.social[i].post;
-           break;
-       case "2":
+            break;
+        case "2":
             // Facebook
             $.switch_facebook.value = Alloy.Globals.user.social[i].post;
-           break;
-   }
+            break;
+    }
 }
 
 // Twitterボタン
@@ -31,7 +31,7 @@ for(var i=0; i<Alloy.Globals.user.social.length; i++){
 $.switch_twitter.addEventListener('change', function(e){
     if(e.source.value){
         // ON のとき
-    	Ti.include('twitter_api.js');
+        Ti.include('twitter_api.js');
 
         //initialization
         var twitterApi = new TwitterApi({
@@ -42,21 +42,21 @@ $.switch_twitter.addEventListener('change', function(e){
         // いったん初期化
         twitterApi.clear_accesstoken();
 
-    	// TODO: エレガントな方法もとむ
-    	// コールバックができなかったので
-    	// oauth_adapter.js の getAccessToken メソッドにて、Alloy.Globals.setTwitterAccount() を直に書いてコールしている
-    	Alloy.Globals.setTwitterAccount = function(responseParams){
-    	    twitterApi.account_verify_credentials({
-    	        onSuccess: function(e){
-                    // 更新
-                    updateSocialSetting(e.source, 1, responseParams['oauth_token'], responseParams['oauth_token_secret'], 1);
-                },
-    	        onError: function(){
-    	            alert('認証に失敗しました');
-                    $.switch_twitter.value = false;
-    	        }
-    	    });
-    	};
+        // TODO: エレガントな方法もとむ
+        // コールバックができなかったので
+        // oauth_adapter.js の getAccessToken メソッドにて、Alloy.Globals.setTwitterAccount() を直に書いてコールしている
+        Alloy.Globals.setTwitterAccount = function(responseParams){
+            twitterApi.account_verify_credentials({
+                onSuccess: function(e){
+                               // 更新
+                               updateSocialSetting(e.source, 1, responseParams['oauth_token'], responseParams['oauth_token_secret'], 1);
+                           },
+                onError: function(){
+                             alert('認証に失敗しました');
+                             $.switch_twitter.value = false;
+                         }
+            });
+        };
 
         // 認証
         twitterApi.init();
@@ -91,19 +91,19 @@ $.switch_facebook.addEventListener('change', function(e){
  */
 function updateSocialSetting(switch_button, social_type, token, secret, share){
     apiMapper.userNotificationApi(
-        Alloy.Globals.user.token,
-        social_type,
-        token,
-        secret,
-        share,
-        function(e){
-            $.switch_button.value = share;
-        },
-        function(e){
-            alert('更新に失敗しました。[notification]');
-            $.switch_button.value = !share;  // 元に戻す
-        }
-    );
+            Alloy.Globals.user.token,
+            social_type,
+            token,
+            secret,
+            share,
+            function(e){
+                $.switch_button.value = share;
+            },
+            function(e){
+                alert('更新に失敗しました。[notification]');
+                $.switch_button.value = !share;  // 元に戻す
+            }
+            );
 }
 
 
