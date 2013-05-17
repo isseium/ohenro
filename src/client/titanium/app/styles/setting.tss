@@ -1,0 +1,46 @@
+"Window": {
+    barColor: 'black',
+},
+".container": {
+    backgroundColor: 'white',
+	layout:'vertical',
+},
+"#user_icon": {
+    top: "10dp",
+    left: "10dp",
+    width: "80dp",
+    height: "80dp",
+    borderWidth: 1,
+    // borderColor: "black",
+    borderRadius: 5,
+},
+"#username": {
+    top: '10dp',
+    left: "100dp",
+    color: "black",
+},
+".frame": {
+    top: '10dp',
+    width: '95%',
+    height: '100dp',
+    borderWidth: 2,
+    borderColor: "black",
+    borderRadius: 5,
+},
+".section": {
+    top: "10dp",
+    left: "10dp",
+    color: "black",
+},
+".switch_frame": {
+    top: '10dp',
+    height: '30dp',
+    width: '95%',
+},
+".switch_label": {
+    left: "20dp",
+    color: "black",
+},
+"Switch": {
+    right: "10dp",
+}

@@ -1,0 +1,11 @@
+<Alloy>
+	<Window id="mapView">
+		<View ns="Ti.Map" id="mymap" />
+		<Button id="scrollToCurrentPosition" onClick="scrollToCurrentPosition">
+		    <Label class="button_scrollToCurrentPosition" />
+	    </Button>
+		<Button id="scrollToOverheadView" onClick="scrollToOverheadView">
+		    <Label class="button_scrollToOverheadView" />
+		</Button>
+	</Window>
+</Alloy>

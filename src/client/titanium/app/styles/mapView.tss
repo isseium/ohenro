@@ -1,0 +1,22 @@
+"#scrollToCurrentPosition" : {
+    width: "48dp",
+    height: "48dp",
+    left: 10,
+    bottom: 10,
+},
+"#scrollToOverheadView" : {
+    width: "48dp",
+    height: "48dp",
+    left: 68,
+    bottom: 10,
+},
+".button_scrollToCurrentPosition" : {
+    backgroundImage: "target_icon&48.png",
+    width: "40dp",
+    height: "40dp",
+},
+".button_scrollToOverheadView" : {
+    backgroundImage: "zoom_icon&48.png",
+    width: "40dp",
+    height: "40dp",
+},

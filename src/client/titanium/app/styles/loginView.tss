@@ -1,0 +1,6 @@
+"Window":{
+    barColor: 'black',
+},
+"twitterButton": {
+	image:"/twitterButton.png"
+}

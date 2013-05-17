@@ -1,0 +1,11 @@
+<Alloy>
+    <!-- TODO: tss に分離 -->
+	<Window id="loginView" title="ユーザ登録">
+		<View>
+			<ImageView id="image" top="30" left="30"/>
+			<Label id="name" top="45" left="80" width="200" height="35"/>
+			<Button id="twitterButton" top="120" width="215" height="41" backgroundImage="/twitterButton@2x.png"/>
+			<Button id="facebookButton" top="200" width="215" height="41" backgroundImage="/facebookButton@2x.png"/>
+		</View>
+	</Window>
+</Alloy>

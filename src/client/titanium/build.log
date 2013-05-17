@@ -1,0 +1,16 @@
+Logfile initialized
+[INFO] logfile = /Users/issei/repos/ohenro/src/client/titanium/build.log
+[DEBUG] /Users/issei/Library/Application Support/Titanium/mobilesdk/osx/3.0.0.GA/android/builder.py simulator ohenro /Users/issei/Library/android-sdk-mac_x86 /Users/issei/repos/ohenro/src/client/titanium net.ikmz.test.ohenro 8 WVGA854 
+[INFO] Building ohenro for Android ... one moment
+[INFO] plugin=/Users/issei/Library/Application Support/Titanium/plugins/ti.alloy/1.0/plugin.py
+[INFO] Detected compiler plugin: ti.alloy/1.0
+[INFO] Titanium SDK version: 3.0.0 (12/12/12 18:49 a5894b3)
+[DEBUG] Waiting for device to be ready ...
+[TRACE] adb devices returned 0 devices/emulators
+[TRACE] adb devices returned 0 devices/emulators
+[TRACE] adb devices returned 0 devices/emulators
+[TRACE] adb devices returned 0 devices/emulators
+[TRACE] adb devices returned 0 devices/emulators
+[INFO] Android Emulator has exited
+[TRACE] adb devices returned 0 devices/emulators
+[ERROR] Timed out waiting for emulator to be ready, you may need to close the emulator and try again

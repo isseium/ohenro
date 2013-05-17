@@ -1,0 +1,15 @@
+<Alloy>
+	<Window id="leftMenu">
+		<TableView id="tableView" />
+	</Window>
+	<Window id="win">
+		<View id="shadowview">
+			<NavigationGroup id="nav">
+				<Window id="innerwin">
+				</Window>
+			</NavigationGroup>
+			<Button id="signup" title="ユーザ登録" top="-50dp" />
+			<Button id="setting" title="設定" top="-50dp" />
+		</View>
+	</Window>
+</Alloy>
