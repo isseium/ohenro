@@ -1,18 +1,22 @@
-Welcome to your Appcelerator Titanium Mobile Project
+### README
 
-This is a blank project.  Start by editing your application's app.js to 
-make your first mobile project using Titanium.
+#### 1. Install
+
+- app_config.js の作成
+oauthtokenなどの機密管理情報をapp_config.jsにて定義している
+新たな環境をつくる場合は、この js ファイルを作成する必要がある
+
+app_config.js ファイルは機密情報を扱うため、git 上に保存してはならない。デフォルトで、 .gitignore に記載している。
 
 
+- 移動
+$ cd app/lib/
 
-----------------------------------
-Stuff our legal folk make us say:
+- サンプルテンプレートを元に作成
+$ cp app_config.{sample.,}js
 
-Appcelerator, Appcelerator Titanium and associated marks and logos are 
-trademarks of Appcelerator, Inc. 
+- 値を設定
+TODO: 記載
 
-Titanium is Copyright (c) 2008-2012 by Appcelerator, Inc. All Rights Reserved.
-
-Titanium is licensed under the Apache Public License (Version 2). Please
-see the LICENSE file for the full license.
-
+#### CONTACT
+all@cheekit.com
