@@ -1,14 +1,13 @@
 ".container": {
-    backgroundColor: 'white',
-    barColor: 'black',
-	layout:'vertical',
+  backgroundColor: 'white',
+  barColor: 'black',
 },
 "#scrollView": {
-	layout:'vertical',
+  layout:'vertical',
 },
 "#description": {
     width: '90%',
-    height: Ti.UI.SIZE,
+    height: Ti.UI.FILL,
 },
 "#comment": {
     height: '120dp',
@@ -20,12 +19,8 @@
     },
 },
 "#checkinButton": {
-    top: '10dp',
-    width: '90%',
-    font: {
-        fontSize: '18dp',
-        fontWeight: 'bold'
-    },
+    bottom: '0dp',
+    height: '20%',
 },
 "ButtonBar": {
     width: "90%"
