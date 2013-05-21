@@ -1,0 +1,10 @@
+<Alloy>
+  <Window id="checkindialog" class="container">
+    <View>
+      <TextArea id="comment" suppressReturn="false">
+        <Label class="hintText" text="コメント" />
+      </TextArea>
+    </View>
+    <Button id="checkin" />
+  </Window>
+</Alloy>

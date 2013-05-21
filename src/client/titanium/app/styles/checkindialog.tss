@@ -1,0 +1,24 @@
+".container": {
+  layout:'vertical',
+},
+"#comment": {
+  borderRadius: 5,
+  borderColor: "#000000",
+  backgroundColor: "white",
+  keyboardToolbarColor: "blue",
+  height: "40%",
+  width: "90%",
+  top: "2%",
+  font: {
+      fontSize: '18dp',
+  },
+},
+"#checkin": {
+  borderRadius: 5,
+  style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
+  systemButton: Titanium.UI.iPhone.SystemButton.CAMERA,
+  backgroundColor: "blue",
+},
+".hintText": {
+  color: "#aaa",
+},

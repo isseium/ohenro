@@ -1,4 +1,3 @@
-
 var ApiMapper = require("apiMapper").ApiMapper;
 var apiMapper = new ApiMapper();
 
@@ -27,6 +26,10 @@ if( isUserLogined() &&
     // チェックイン許可
     $.checkinButton.touchEnabled = true;
     $.checkin.opacity = 1;
+    
+    // チェックインダイアログ
+    var dialog = Alloy.createController('checkindialog').getView();
+    dialog.open();
 }else{
     // チェックイン拒否
 
@@ -38,46 +41,9 @@ if( isUserLogined() &&
     }
 
     $.checkinButton.touchEnabled = false;
+    $.checkinButton.touchEnabled = true;
     $.checkinButton.opacity = 0.70;
 }
-
-/**
- * コメントボックスフォーカス時の設定
- */
-/*
-$.comment.addEventListener('focus', function(e){
-    // 1. 右上にチェックインボタンを表示する（キーボードで下部のチェックインボタンが隠れてしまうため）
-    var checkinButton = Ti.UI.createButton({title: 'Checkin'});
-    checkinButton.addEventListener('click', checkinSpot);
-    $.checkin.rightNavButton = checkinButton;
-});
-*/
-
-/**
- * スポットにチェックインする
- */
-var checkinSpot = function checkinSpot(){
-    var spot_id = $.args.spot_id;
-    var comment = $.comment.value;
-
-    apiMapper.spotcheckinApi(Alloy.Globals.user.token, spot_id, comment,
-        function(e){
-            //成功時
-            Ti.API.info("Received text: " + this.responseText);
-            Ti.API.info('Checkin completed');
-
-            // Map画面に戻る
-            $.nav.close($.parent);
-//            $.nav.group.close($.checkin.getView());
-        },
-        function(e){
-            //失敗時
-            Ti.API.info("Received text: " + this.responseText);
-            alert('チェックインに失敗しました : ' + e.data);
-        }
-    );
-};
-
 
 /**
  * チェックインできる位置にスポットが存在するかチェック
@@ -121,4 +87,12 @@ function isUserLogined(){
     }
 
     return true;
+}
+
+function openCheckinDialog(){
+    // チェックインダイアログ
+    var controller = Alloy.createController('checkindialog')
+    controller.setNavigation($.nav, $.win);
+    var dialog = controller.getView();
+    $.nav.open(dialog);
 }

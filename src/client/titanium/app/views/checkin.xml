@@ -1,5 +1,5 @@
 <Alloy>
-  <Window class="container">
+  <Window id="win" class="container">
     <ScrollView id="scrollView">
       <ImageView height="50%" width="100%" image="http://blogimg.goo.ne.jp/user_image/4e/71/c3a456d026a44eaee1d92c629d4b4d04.jpg">
         <View backgroundColor="black" opacity="0.2" width="100%" height="10%" bottom="0px">
@@ -20,6 +20,6 @@
     <!-- TODO: style の分離 -->
     <View backgroundColor="black" opacity="0.2" width="100%" height="20%" bottom="0px">
     </View>
-    <ImageView id="checkinButton" image="map_marker.png" onClick="checkinSpot"/>
+    <ImageView id="checkinButton" image="map_marker.png" onClick="openCheckinDialog"/>
   </Window>
 </Alloy>
