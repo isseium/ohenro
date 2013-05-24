@@ -174,7 +174,6 @@ HEAD: Retrieve the meta information relative to a sibling.&#13;
    <name>User_notification</name>
    <enabled>1</enabled>
    <public>1</public>
-   <description></description>
    <route>api/user/notification</route>
    <hash>8d58aea30d08b8a14e43710f4a0409458746f18d</hash>
    <parameters>
@@ -199,6 +198,15 @@ HEAD: Retrieve the meta information relative to a sibling.&#13;
      <required>1</required>
     </parameter>
    </parameters>
+  </action>
+  <action>
+   <name>Spot</name>
+   <enabled>1</enabled>
+   <public>1</public>
+   <description></description>
+   <route>api/spot/:id</route>
+   <parameters></parameters>
+   <hash>70ff5e617019723eda856c531d6791fdf9ee5ef9</hash>
   </action>
  </actions>
 </frapi-config>

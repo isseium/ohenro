@@ -1,14 +1,21 @@
 <Alloy>
-    <Window class="container">
-        <ScrollView id="scrollView">
-            <Label class="frame">
-                <Label id="description">
-                    This is sample. This is sample. This is sample. This is sample. This is sample. This is sample.
-                    This is sample. This is sample. This is sample. This is sample. This is sample. This is sample.
-                </Label>
-            </Label>
-            <TextArea id="comment" class="frame"/>
-            <Button id="checkinButton" title="Checkin" onClick="checkinSpot" />
-        </ScrollView>
-    </Window>
+  <Window id="win" class="container">
+    <ScrollView id="scrollView">
+      <ImageView id="image" >
+        <View backgroundColor="black" opacity="0.2" width="100%" height="10%" bottom="0px" />
+        <Label id="author" />
+      </ImageView>
+      
+      <Label height="45%" class="frame">
+        <Label id="description" />
+      </Label>
+    </ScrollView>
+    
+    <!-- TODO: style の分離 -->
+    <View width="100%" height="20%" bottom="0px">
+      <View backgroundColor="black" opacity="0.2" height="100%" />
+      <Label id="message" width="80%" color="white" text="スポットに近づいてチェックインしてみましょう" />
+      <ImageView id="checkinButton" image="map_marker.png" onClick="openCheckinDialog"/>
+    </View>
+  </Window>
 </Alloy>

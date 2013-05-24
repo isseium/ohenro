@@ -1,39 +1,46 @@
 ".container": {
-    backgroundColor: 'white',
-    barColor: 'black',
-	layout:'vertical',
+  backgroundColor: 'white',
+  barColor: 'black',
 },
 "#scrollView": {
-	layout:'vertical',
+  layout:'vertical',
 },
 "#description": {
     width: '90%',
-    height: Ti.UI.SIZE,
+    height: Ti.UI.FILL,
+    bottom: "10px",
 },
 "#comment": {
-    height: '120dp',
-    width: '90%',
-    enableReturnKey: true,
-    suppressReturn: false,
-    font: {
-        fontSize: '18dp',
-    },
+  height: '120dp',
+  width: '90%',
+  enableReturnKey: true,
+  suppressReturn: false,
+  font: {
+      fontSize: '18dp',
+  },
 },
 "#checkinButton": {
-    top: '10dp',
-    width: '90%',
-    font: {
-        fontSize: '18dp',
-        fontWeight: 'bold'
-    },
+  bottom: '0dp',
+  height: '90%',
 },
 "ButtonBar": {
-    width: "90%"
+  width: "90%"
 },
 ".frame": {
-    top: '10dp',
-	layout:'vertical',
-    borderWidth: 2,
-    borderColor: "black",
-    borderRadius: 5,
+  top: '10dp',
+  layout:'vertical',
+  borderWidth: 2,
+  borderColor: "black",
+  borderRadius: 5,
 },
+"#image": {
+  height: "50%",
+  width: "100%",
+},
+"#author": {
+  color: "white",
+  width: "100%",
+  height: "10%",
+  bottom: "0px"
+},
+

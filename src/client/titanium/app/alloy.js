@@ -16,5 +16,18 @@ Ti.include("app_config.js");
 // アプリケーション固定情報
 
 // Center
-Alloy.Globals.app.overview_lat = 38.591114;
-Alloy.Globals.app.overview_lon = 140.95459;
+Alloy.Globals.app.overview_lat = 39.701683;
+Alloy.Globals.app.overview_lon = 141.136369;
+Alloy.Globals.app.overview_lat_delta = 0.4;
+Alloy.Globals.app.overview_lon_delta = 0.4;
+
+// タイトル
+Alloy.Globals.app.title = "いわて食巡り";
+Alloy.Globals.app.list_title = "おすすめ飲食店";
+Alloy.Globals.app.spot_index = "カ所";
+
+// エラー文面
+// TODO: あとで i18 対応に統合
+Alloy.Globals.error = {
+  FAILED_TO_ACCESS_API: "通信に失敗しました。",
+};

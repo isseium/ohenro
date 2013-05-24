@@ -37,30 +37,30 @@ exports.setAnnotation = function(spotData){
     for ( var i in spotData){
         // チェックインコメントを整形
         var checkin_comment = "未チェックイン"
-        if(typeof spotData[i].comment !== "undefined"){
-            checkin_comment = "[" + spotData[i].checkin_time + "]" + spotData[i].comment;
-        }
+            if(typeof spotData[i].comment !== "undefined"){
+                checkin_comment = "[" + spotData[i].checkin_time + "]" + spotData[i].comment;
+            }
 
         // アノテーション作成
-		var annotation = Ti.Map.createAnnotation({
-		    myid: i,
-			latitude: spotData[i].latitude,
-			longitude: spotData[i].longitude,
-			title: spotData[i].title,
-			subtitle: checkin_comment,
-			animate: true,
-			pincolor: (spotData[i].checkin) ? Titanium.Map.ANNOTATION_GREEN : Titanium.Map.ANNOTATION_RED, // チェックイン履歴によってピン色を変える
-			rightButton: Titanium.UI.iPhone.SystemButton.DISCLOSURE,
-			bubbleParent: false,             // タップ時に後ろのピンをタップすることを防ぐ
-			// 任意プロパティ
-		    spot_id: spotData[i].spot_id,
-			mydescription: spotData[i].description,
-			comment: spotData[i].comment,
-			checkin: spotData[i].checkin,
-			checkin_time: spotData[i].checkin_time,
-		});
-		$.mymap.addAnnotation(annotation);
-	}
+        var annotation = Ti.Map.createAnnotation({
+            myid: i,
+            latitude: spotData[i].latitude,
+            longitude: spotData[i].longitude,
+            title: spotData[i].title,
+            subtitle: checkin_comment,
+            animate: true,
+            pincolor: (spotData[i].checkin) ? Titanium.Map.ANNOTATION_GREEN : Titanium.Map.ANNOTATION_RED, // チェックイン履歴によってピン色を変える
+            rightButton: Titanium.UI.iPhone.SystemButton.DISCLOSURE,
+            bubbleParent: false,             // タップ時に後ろのピンをタップすることを防ぐ
+            // 任意プロパティ
+            spot_id: spotData[i].spot_id,
+            mydescription: spotData[i].description,
+            comment: spotData[i].comment,
+            checkin: spotData[i].checkin,
+            checkin_time: spotData[i].checkin_time,
+        });
+        $.mymap.addAnnotation(annotation);
+    }
 };
 
 /**
@@ -70,17 +70,17 @@ $.mymap.addEventListener('click', function(e){
     // ピンのタイトルをタップしたときに checkin 画面表示
     // refs. http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.Map-method-createAnnotation
     if (e.clicksource == 'title' || e.clicksource == 'rightButton'){
-    	var args = {
-    	    spot_id: e.annotation.spot_id,
-    		title : e.annotation.title,
-    		imagePath: e.annotation.imagePath,
-    		description: e.annotation.mydescription,                         // description というプロパティは予約されているので使えないみたい
-    		spotPosition: {latitude: e.annotation.latitude, longitude: e.annotation.longitude},
-    		currentPosition: Alloy.Globals.currentPosition,                  // 現在地情報
-    		comment: e.annotation.comment,
-    		checkin: e.annotation.checkin,
-    		checkin_time: e.annotation.checkin_time,
-    	};
+        var args = {
+          spot_id: e.annotation.spot_id,
+          title : e.annotation.title,
+          imagePath: e.annotation.imagePath,
+          description: e.annotation.mydescription,                         // description というプロパティは予約されているので使えないみたい
+          spotPosition: {latitude: e.annotation.latitude, longitude: e.annotation.longitude},
+          currentPosition: Alloy.Globals.currentPosition,                  // 現在地情報
+          comment: e.annotation.comment,
+          checkin: e.annotation.checkin,
+          checkin_time: e.annotation.checkin_time,
+        };
         var controller = Alloy.createController('checkin', args);
         var view = controller.getView();
 
@@ -98,8 +98,8 @@ $.mymap.addEventListener('click', function(e){
  * 指定した位置にズームする
  */
 exports.zoomTo = function(lat,lon){
-	var region = {latitude:lat,longitude:lon,animate:true,latitudeDelta:0.04, longitudeDelta:0.04};
-	$.mymap.setLocation(region);
+    var region = {latitude:lat,longitude:lon,animate:true,latitudeDelta:0.04, longitudeDelta:0.04};
+    $.mymap.setLocation(region);
 };
 
 /**
@@ -154,7 +154,7 @@ function scrollToOverheadView(){
         latitude: Alloy.Globals.app.overview_lat,
         longitude: Alloy.Globals.app.overview_lon,
         animate: true,
-        latitudeDelta: 4,
-        longitudeDelta: 4,
+        latitudeDelta: Alloy.Globals.app.overview_lat_delta,
+        longitudeDelta: Alloy.Globals.app.overview_lon_delta,
     });
 }
