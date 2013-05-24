@@ -90,6 +90,6 @@ cameraButton.addEventListener('click', function(){
 // KeyboardToolbar に追加
 var toolbar = Titanium.UI.iOS.createToolbar({
   items:[flexSpace, cameraButton, fixSpace],
-//  barColor: "#222",
+  barColor: "black",
 });
 $.comment.setKeyboardToolbar(toolbar); 

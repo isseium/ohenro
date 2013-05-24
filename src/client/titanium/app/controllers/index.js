@@ -56,6 +56,7 @@ function setTableData(spotData){
 
     // 巡礼地一覧
     var checkinCount = 0;
+    var spotCount = 0;
     for ( var i in spotData) {
         var args = {
             title : spotData[i].title,
@@ -69,6 +70,7 @@ function setTableData(spotData){
         if(spotData[i].checkin){
             checkinCount++;
         }
+        spotCount++;
     }
 
     // Header の設定
@@ -100,7 +102,7 @@ function setTableData(spotData){
         left : 10,
         right : 10,
         height : 'auto',
-        text : "巡礼地一覧",
+        text : Alloy.Globals.app.list_title,
         font : {
             fontSize : 18,
         fontWeight : 'bold'
@@ -112,7 +114,7 @@ function setTableData(spotData){
         bottom : 8,
         right : 10,
         height : 'auto',
-        text : "0 / 88 箇所巡礼済",
+        text : "0 / " + spotCount + " " + Alloy.Globals.app.spot_index + "達成",
         font : {
             fontSize : 10,
         fontWeight : 'bold'
@@ -121,7 +123,7 @@ function setTableData(spotData){
     });
 
     // countLabel変更
-    countLabel.text = checkinCount + " 箇所巡礼済\n残り " + (88 - checkinCount) + " 箇所";
+    countLabel.text = checkinCount + " / " + spotCount + " " + Alloy.Globals.app.spot_index + "達成\n残り " + (spotCount - checkinCount) + " " + Alloy.Globals.app.spot_index;
 
     // Viewをセット
     headerView.add(headerLabel);

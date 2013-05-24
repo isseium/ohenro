@@ -11,7 +11,7 @@
 },
 "#innerwin": {
 	backgroundColor : 'white',
-	title: "東北巡礼",
+	title: Alloy.Globals.app.title,
 	barColor : "black",
 	left : "0",
 	zIndex : "10"

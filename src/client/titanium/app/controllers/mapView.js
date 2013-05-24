@@ -152,9 +152,9 @@ function scrollToCurrentPosition(){
 function scrollToOverheadView(){
     $.mymap.setLocation({
         latitude: Alloy.Globals.app.overview_lat,
-    longitude: Alloy.Globals.app.overview_lon,
-    animate: true,
-    latitudeDelta: 4,
-    longitudeDelta: 4,
+        longitude: Alloy.Globals.app.overview_lon,
+        animate: true,
+        latitudeDelta: Alloy.Globals.app.overview_lat_delta,
+        longitudeDelta: Alloy.Globals.app.overview_lon_delta,
     });
 }

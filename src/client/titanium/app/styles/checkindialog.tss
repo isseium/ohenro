@@ -1,5 +1,6 @@
 ".container": {
   layout:'vertical',
+  barColor: 'black',
 },
 "#comment": {
   borderRadius: 5,

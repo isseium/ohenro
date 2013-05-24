@@ -129,7 +129,6 @@ class Action_Spot extends Frapi_Action implements Frapi_Action_Interface
         // 送信
         $response = $client->request();
 
-        // TODO: 返却値を処理
         $json = json_decode($response->getBody());
 
         return array(
