@@ -71,15 +71,15 @@ $.mymap.addEventListener('click', function(e){
     // refs. http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.Map-method-createAnnotation
     if (e.clicksource == 'title' || e.clicksource == 'rightButton'){
         var args = {
-            spot_id: e.annotation.spot_id,
-    title : e.annotation.title,
-    imagePath: e.annotation.imagePath,
-    description: e.annotation.mydescription,                         // description というプロパティは予約されているので使えないみたい
-    spotPosition: {latitude: e.annotation.latitude, longitude: e.annotation.longitude},
-    currentPosition: Alloy.Globals.currentPosition,                  // 現在地情報
-    comment: e.annotation.comment,
-    checkin: e.annotation.checkin,
-    checkin_time: e.annotation.checkin_time,
+          spot_id: e.annotation.spot_id,
+          title : e.annotation.title,
+          imagePath: e.annotation.imagePath,
+          description: e.annotation.mydescription,                         // description というプロパティは予約されているので使えないみたい
+          spotPosition: {latitude: e.annotation.latitude, longitude: e.annotation.longitude},
+          currentPosition: Alloy.Globals.currentPosition,                  // 現在地情報
+          comment: e.annotation.comment,
+          checkin: e.annotation.checkin,
+          checkin_time: e.annotation.checkin_time,
         };
         var controller = Alloy.createController('checkin', args);
         var view = controller.getView();

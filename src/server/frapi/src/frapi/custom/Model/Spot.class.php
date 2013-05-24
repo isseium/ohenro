@@ -75,4 +75,27 @@ SQL;
 
         return true;
     }
+
+    public function fetchImageLatest(){
+        $photosTable = new Zend_Db_Table('Photos');
+        // select * from (photos join checkin on photos.checkin_id = checkin.id) join users on checkin.user_id = users.id;
+        $select = $photosTable
+            ->select()
+            ->setIntegrityCheck(false)
+            ->from(array('p' => 'Photos'),
+                array(
+                    'author' => 'u.name',
+                    'daizu_image_small' => 'p.daizu_image_small',
+                    'daizu_image_medium' => 'p.daizu_image_medium',
+                    'daizu_image_large' => 'p.daizu_image_large',
+                )
+            )->join(array('c' => 'Checkin'), 'p.checkin_id = c.id' )
+            ->join(array('u' => 'Users'), 'c.user_id = u.id' )
+            ->where('c.spot_id = ?', $this->spot_id)->order('p.created_at desc');
+        error_log($select->__toString());
+
+        $row = $photosTable->fetchRow($select);
+
+        return $row;
+    }
 }

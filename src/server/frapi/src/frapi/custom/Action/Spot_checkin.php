@@ -94,13 +94,61 @@ class Action_Spot_checkin extends Frapi_Action implements Frapi_Action_Interface
         if ($valid instanceof Frapi_Error) {
             throw $valid;
         }
-
+        
+        // DB登録
         $user = UserFactory::generateByToken($this->getParam('token'));
+        if(!$user){
+            throw new Exception('Invalid token');
+        }
         $spot = SpotManager::generateBySpotId($this->getParam('spot_id'));
         $comment = $this->getParam('comment');
-
         $spot->checkin($user, $comment);
         $checkin = CheckinManager::generateByCheckinId($spot->checkin_id);
+
+
+
+        // 写真を投稿
+        // 受け取ったファイル
+        if(isset($_FILES["image"])){
+            $tmpfile = $_FILES["image"]["tmp_name"];
+            // error_log(print_r($_FILES, true));
+            
+            // Daizu 向け POST 情報
+            $client = new Zend_Http_Client('http://192.168.1.8:3000/pictures',
+                array(
+                    'maxredirects' => 0,
+                    'timeout'      => 30   // TODO: 妥当な値に変更
+                )
+            );
+
+            $client->setFileUpload($tmpfile, 'picture[avatar]'); // ファイル添付
+            $client->setHeaders('Accept', '*/*');
+            $client->setMethod(Zend_Http_Client::POST);
+            // 送信
+            $response = $client->request();
+            $json = json_decode($response->getBody());
+
+            // test: Stab 
+            // $response = array(
+            //     'id' => 1,
+            //     'image_small' => '/small',
+            //     'image_medium' => '/medium',
+            //     'image_large' => '/large',
+            //     'created_at' => 'create hiduke-',
+            //     'updated_at' => 'update hiduke---',
+            // );
+
+            $photo = new Photo(
+                $spot->spot_id,
+                $checkin->id,
+                $json->id,
+                $json->image_small,
+                $json->image_medium,
+                $json->image_large
+            );
+            
+            $photo->save();
+        }
 
         // シェア設定
         // $message = "これはテストだよー time=" . $time;
@@ -113,6 +161,8 @@ class Action_Spot_checkin extends Frapi_Action implements Frapi_Action_Interface
             "created_at" => $checkin->created_at,
             "updated_at" => $checkin->updated_at,
         );
+
+        error_log(print_r($response, true));
 
         return array("checkin" => $response, "meta" => array("status" => "true"));
     }

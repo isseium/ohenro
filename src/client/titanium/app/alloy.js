@@ -18,3 +18,10 @@ Ti.include("app_config.js");
 // Center
 Alloy.Globals.app.overview_lat = 38.591114;
 Alloy.Globals.app.overview_lon = 140.95459;
+
+
+// エラー文面
+// TODO: あとで i18 対応に統合
+Alloy.Globals.error = {
+  FAILED_TO_ACCESS_API: "通信に失敗しました。",
+};

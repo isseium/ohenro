@@ -80,6 +80,7 @@ class Action_User_my extends Frapi_Action implements Frapi_Action_Interface
         // ユーザのソーシャルアカウントを取得
         $socialAccount = SocialAccountManager::generateByUserId($user->id);
 
+
         // response
         $response = array(
             "id" => $user->id,

@@ -65,7 +65,6 @@ alert("ERROR");
 */
 
 ApiMapper = function(){};
-//ApiMapper.prototype.apiEndpoint = "http://aoyama.cheek-it.com/api";
 ApiMapper.prototype.apiEndpoint = Alloy.Globals.app.api_endpoint;
 ApiMapper.prototype.accessApi = function(method, uri, param, callback_success, callback_failure) {
 
@@ -87,14 +86,33 @@ ApiMapper.prototype.spotAllApi = function (callback_success, callback_failure){
 }
 
 ApiMapper.prototype.spotMyApi = function (token, callback_success, callback_failure){
-  return this.accessApi('GET', this.apiEndpoint + "/spot/my.json?token=" + token, {}, callback_success, callback_failure);
+    return this.accessApi('GET', this.apiEndpoint + "/spot/my.json?token=" + token, {}, callback_success, callback_failure);
 }
 
-ApiMapper.prototype.spotcheckinApi = function (token, spot_id, comment, callback_success, callback_failure){
+
+ApiMapper.prototype.spotApi = function (id, callback_success, callback_failure){
+  return this.accessApi('GET', this.apiEndpoint + "/spot/" + id + ".json", {}, callback_success, callback_failure);
+}
+
+ApiMapper.prototype.spotcheckinApi = function (token, spot_id, comment, image, callback_success, callback_failure){
+  var params = {
+    token: token,
+    spot_id: spot_id,
+    comment: "",
+  };
+  
+  // オプション
+  if(comment){
+    params.comment = comment;
+  }
+  if(image){
+    params.image = image;
+  }
+  
   return this.accessApi(
       'POST',
       this.apiEndpoint + "/spot/checkin.json",
-      {token : token, spot_id : spot_id, comment : comment},
+      params,
       callback_success,
       callback_failure);
 }

@@ -7,10 +7,26 @@ var apiMapper = new ApiMapper();
 var args = arguments[0] || {};
 $.args =  args;
 
-// 表示設定
-// $.title.text = args.title || '';
-$.description.text = $.args.description || '';
-// $.image.image = args.imagePath;
+
+// スポット情報取得
+apiMapper.spotApi($.args.spot_id,
+    function(e){
+        //成功時
+        spot = JSON.parse(this.responseText);
+        
+        // 表示設定
+        var image_url = Alloy.Globals.app.image_endpoint + "/" + spot.spot.image.large_url;
+        $.image.image = image_url;
+        $.author.text = 'Photo by ' + spot.spot.image.author;
+        $.description.text = spot.spot.description;
+    },
+    function(e){
+        //失敗時
+        Ti.API.info("Received text: " + this.responseText);
+        alert(Alloy.Globals.error.FAILED_TO_ACCESS_API + e.data);
+    }
+);
+
 
 // 呼び出し元からナビゲーションバーをセットする
 exports.setNavigation = function(nav, parent){
@@ -24,25 +40,19 @@ if( isUserLogined() &&
                $.args.spotPosition.latitude   , $.args.spotPosition.longitude)
     ){
     // チェックイン許可
-    $.checkinButton.touchEnabled = true;
-    $.checkin.opacity = 1;
-    
-    // チェックインダイアログ
-    var dialog = Alloy.createController('checkindialog').getView();
-    dialog.open();
+    $.checkinButton.show();
+    $.message.hide();
 }else{
     // チェックイン拒否
 
     // ログイン状態に応じてコメントを変更
-    if(isUserLogined()){
-    }else{
+    if(! isUserLogined()){
         // $.comment.value = "チェックインをするにはログインする必要があります";
         alert('チェックインするにはユーザ登録が必要です');
     }
 
-    $.checkinButton.touchEnabled = false;
-    $.checkinButton.touchEnabled = true;
-    $.checkinButton.opacity = 0.70;
+    $.checkinButton.hide();
+    $.message.show();
 }
 
 /**
@@ -91,8 +101,8 @@ function isUserLogined(){
 
 function openCheckinDialog(){
     // チェックインダイアログ
-    var controller = Alloy.createController('checkindialog')
-    controller.setNavigation($.nav, $.win);
+    var controller = Alloy.createController('checkindialog', $.args)
     var dialog = controller.getView();
+    controller.setNavigation($.nav, $.parent, dialog);
     $.nav.open(dialog);
 }
