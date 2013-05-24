@@ -81,7 +81,7 @@ cameraButton.addEventListener('click', function(){
     cancel: function(){
       $.comment.focus();
     },
-    // TODO:  saveToPhotoGallery:true,                // 撮影データのフォトギャラリーへの保存
+    saveToPhotoGallery:true,                // 撮影データのフォトギャラリーへの保存
     allowEditing: true,                     // 選択直後に拡大縮小移動をするか否かのフラグ
     mediaTypes:[Ti.Media.MEDIA_TYPE_PHOTO], // 選択可能なメディア種別を配列で指定
   });
