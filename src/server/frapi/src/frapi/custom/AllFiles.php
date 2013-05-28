@@ -9,8 +9,7 @@ define('FRAPI_CACHE_ADAPTER', 'apc');
 // Other data
 
 defined('CUSTOM_LIBRARY') || define('CUSTOM_LIBRARY', CUSTOM_PATH. DIRECTORY_SEPARATOR . 'Library');
-defined('CUSTOM_LIBRARY_FRAPI_PLUGINS') ||
-    define('CUSTOM_LIBRARY_FRAPI_PLUGINS', CUSTOM_LIBRARY . DIRECTORY_SEPARATOR . 'Frapi' . DIRECTORY_SEPARATOR . 'Plugins');
+defined('CUSTOM_LIBRARY_FRAPI_PLUGINS') || define('CUSTOM_LIBRARY_FRAPI_PLUGINS', CUSTOM_LIBRARY . DIRECTORY_SEPARATOR . 'Frapi' . DIRECTORY_SEPARATOR . 'Plugins');
 
 
 // Zend 自動読み込み
@@ -34,6 +33,7 @@ $autoloader = Zend_Loader_Autoloader::getInstance();
 
 $config = new Zend_Config_Ini(CUSTOM_PATH . '/Config/config.ini');
 $dbAdapter = Zend_Db::factory($config->db);
+define('IMG_ENDPOINT_URL', $config->img->endpoint_url);
 Zend_Db_Table::setDefaultAdapter($dbAdapter);
 
 // Model以下の読み込み

@@ -114,7 +114,7 @@ class Action_Spot_checkin extends Frapi_Action implements Frapi_Action_Interface
             // error_log(print_r($_FILES, true));
             
             // Daizu 向け POST 情報
-            $client = new Zend_Http_Client('http://192.168.1.8:3000/pictures',
+            $client = new Zend_Http_Client(IMG_ENDPOINT_URL,    // config.ini にて設定
                 array(
                     'maxredirects' => 0,
                     'timeout'      => 30   // TODO: 妥当な値に変更
