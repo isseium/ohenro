@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+
+<h1><%= @picture.avatar_file_name %></h1>
+<%= image_tag @picture.avatar.url(:large) %>
+<%= image_tag @picture.avatar.url(:medium) %>
+<%= image_tag @picture.avatar.url(:small) %>
+
+<%= link_to 'Edit', edit_picture_path(@picture) %> |
+<%= link_to 'Back', pictures_path %>

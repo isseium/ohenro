@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'spring/client'
+Spring::Client.run(ARGV)
