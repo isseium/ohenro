@@ -10,15 +10,6 @@
     height: Ti.UI.FILL,
     bottom: "10px",
 },
-"#comment": {
-  height: '120dp',
-  width: '90%',
-  enableReturnKey: true,
-  suppressReturn: false,
-  font: {
-      fontSize: '18dp',
-  },
-},
 "#checkinButton": {
   bottom: '0dp',
   height: '90%',
@@ -34,7 +25,11 @@
   borderRadius: 5,
 },
 "#image": {
-  height: "50%",
+  height: "100%",
+  width: "100%",
+},
+"#image_frame": {
+  height: "60%",
   width: "100%",
 },
 "#author": {

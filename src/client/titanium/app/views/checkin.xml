@@ -1,10 +1,11 @@
 <Alloy>
   <Window id="win" class="container">
     <ScrollView id="scrollView">
-      <ImageView id="image" >
+      <View id="image_frame">
+        <ImageView id="image" />
         <View backgroundColor="black" opacity="0.2" width="100%" height="10%" bottom="0px" />
         <Label id="author" />
-      </ImageView>
+      </View>
       
       <Label height="45%" class="frame">
         <Label id="description" />
