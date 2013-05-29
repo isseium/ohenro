@@ -66,7 +66,7 @@ $.twitterButton.addEventListener('click', function(e) {
     });
     
     // いったん初期化
-    twitterApi.clear_accesstoken();
+    // twitterApi.clear_accesstoken();
 
 
     // TODO: エレガントな方法もとむ
