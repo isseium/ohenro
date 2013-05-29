@@ -2,6 +2,7 @@
 /src/client/titanium/build
 /src/client/titanium/Resources
 /src/client/titanium/app/lib/app_config.js
+/src/server/daizu/config/database.yml
 *.pem
 *.swp
 *.swn
