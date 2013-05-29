@@ -64,6 +64,9 @@ $.twitterButton.addEventListener('click', function(e) {
         consumerKey: Alloy.Globals.app.twitter_consumer_token,
         consumerSecret:Alloy. Globals.app.twitter_consumer_secret,
     });
+    
+    // いったん初期化
+    twitterApi.clear_accesstoken();
 
 
     // TODO: エレガントな方法もとむ

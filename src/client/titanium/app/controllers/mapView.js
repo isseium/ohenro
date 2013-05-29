@@ -58,6 +58,7 @@ exports.setAnnotation = function(spotData){
             comment: spotData[i].comment,
             checkin: spotData[i].checkin,
             checkin_time: spotData[i].checkin_time,
+            image: spotData[i].image,
         });
         $.mymap.addAnnotation(annotation);
     }

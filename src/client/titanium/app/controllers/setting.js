@@ -12,6 +12,12 @@ $.args =  args;
 $.user_icon.image = Alloy.Globals.user.icon_url;
 $.username.text = Alloy.Globals.user.name;
 
+// 呼び出し元からナビゲーションバーをセットする
+exports.setNavigation = function(nav, parent){
+    $.nav = nav;
+    $.parent = parent;
+};
+
 // ソーシャル連携状態をサーバと同期する
 for(var i=0; i<Alloy.Globals.user.social.length; i++){
     switch(Alloy.Globals.user.social[i].type){
@@ -125,3 +131,34 @@ Ti.Facebook.addEventListener('login', loginFacebook);
 $.setting.addEventListener('close', function(){
     Ti.Facebook.removeEventListener('login', loginFacebook);
 });
+
+// 削除ボタン
+var button_truncate = Titanium.UI.createButton({
+  systemButton: Titanium.UI.iPhone.SystemButton.TRASH
+});
+button_truncate.addEventListener('click', function(){
+  var alertDialog = Titanium.UI.createAlertDialog({
+    title: 'リセット',
+      message: 'すべての情報をリセットしますか？',
+      buttonNames: ['OK','Cancel'],
+      cancel: 1
+  });
+  alertDialog.addEventListener('click',function(event){
+    // Cancelボタンが押されたかどうか
+    if(event.cancel){
+      // cancel時の処理: なにもしない
+    }
+    // 選択されたボタンのindexも返る
+    if(event.index == 0){
+      Titanium.App.Properties.removeProperty('token');
+      Titanium.App.Properties.removeProperty('icon_url');
+      Alloy.Globals.user = undefined;
+      
+      $.nav.close($.parent);
+      $.parent.close();
+    }
+  });
+  alertDialog.show();
+});
+
+$.setting.rightNavButton = button_truncate;

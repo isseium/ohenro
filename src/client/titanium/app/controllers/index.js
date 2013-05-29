@@ -22,6 +22,10 @@ mapView.setNavigation($.ds.nav);    // Navigationバーのセット
 
 // 地図画面に戻るたびに、情報を更新する
 $.ds.innerwin.addEventListener('focus', function(){
+    if(typeof Alloy.Globals.user === 'undefined'){
+        initUser();
+        initView();
+    }
     // token が含まれているときは情報更新を試みる
     if(typeof Alloy.Globals.user !== 'undefined' && Alloy.Globals.user.token){
         initUser();
@@ -212,6 +216,7 @@ function loadSpot(){
                     tmpData.latitude = json.spots[i].location.lat;
                     tmpData.longitude = json.spots[i].location.lon;
                     tmpData.checkin = false;     // checkinしたか
+                    tmpData.image = 'pin_before.png';
                     spotData[tmpData.spot_id] = tmpData;
                 }
 
@@ -227,6 +232,7 @@ function loadSpot(){
                                 spotData[json.spots[i].id].checkin_id = json.spots[i].checkin_id;
                                 spotData[json.spots[i].id].comment = json.spots[i].comment;
                                 spotData[json.spots[i].id].checkin_time = json.spots[i].updated_at;
+                                spotData[json.spots[i].id].image = 'pin_after.png';
                             }
                             mapView.setAnnotation(spotData);
                             setTableData(spotData);
@@ -265,6 +271,7 @@ function initView(){
     }else{
         // 登録済みのとき
         $.ds.innerwin.setRightNavButton($.ds.setting);
+        
     }
 }
 
@@ -274,9 +281,10 @@ $.ds.setting.addEventListener('click', function(){
         alert('インターネットへの接続に失敗しました。電波状況のよいところで再度お試し下さい。');
         return;
     }
-
+    
     var controller = Alloy.createController('setting');
     var win = controller.getView();
+    controller.setNavigation($.ds.nav, win);
     win.title = "設定";
     $.ds.nav.title = '設定';
     $.ds.nav.open(win);
