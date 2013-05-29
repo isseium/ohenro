@@ -40,13 +40,21 @@ var checkinSpot = function(){
             //失敗時
             Ti.API.info("Received text: " + this.responseText);
             alert('チェックインに失敗しました : ' + this.responseText);
+            checkinButton.touchEnabled = true;
+            $.indicator_dialog.hide();
         }
     );
 };
-
-// 右上にチェックインボタンを表示する（キーボードで下部のチェックインボタンが隠れてしまうため）
 var checkinButton = Ti.UI.createButton({title: 'Checkin'});
 checkinButton.addEventListener('click', checkinSpot);
+checkinButton.addEventListener('click', function(){
+    // ダイアログ表示
+    $.indicator_dialog.show();
+    $.indicator.show();
+    
+    // 多重投稿防止
+    $.checkindialog.touchEnabled = false;
+});
 $.checkindialog.rightNavButton = checkinButton;
 
 // 画面表示完了後にコメント欄にfocus

@@ -18,8 +18,17 @@
   borderRadius: 5,
   style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
   systemButton: Titanium.UI.iPhone.SystemButton.CAMERA,
-  backgroundColor: "blue",
 },
 ".hintText": {
   color: "#aaa",
 },
+"#indicator": {
+  color: "black",
+  style: "Ti.UI.iPhone.ActivityIndicatorStyle.PLAIN",
+},
+"#indicator_dialog": {
+  width: "70%",
+  height: "30%",
+  borderRadius: 10,
+  visible: false,
+}
