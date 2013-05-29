@@ -121,7 +121,7 @@ ApiMapper.prototype.userregisterApi = function (name, social_type, social_token,
   return this.accessApi(
       'POST',
       this.apiEndpoint + "/user/register.json",
-      {name : name, social_type : social_type, social_token : social_token,social_secret : Ti.Utils.md5HexDigest("cheekit" + social_secret)},
+      {name : name, social_type : social_type, social_token : social_token,social_secret : social_secret},
       callback_success,
       callback_failure);
 }

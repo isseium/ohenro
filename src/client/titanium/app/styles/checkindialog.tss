@@ -23,11 +23,12 @@
   color: "#aaa",
 },
 "#indicator": {
+  width: "100%",
   color: "black",
   style: "Ti.UI.iPhone.ActivityIndicatorStyle.PLAIN",
 },
 "#indicator_dialog": {
-  width: "90%",
+  width: "95%",
   height: "30%",
   borderRadius: 10,
   visible: false,
