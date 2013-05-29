@@ -41,6 +41,7 @@ var checkinSpot = function(){
             Ti.API.info("Received text: " + this.responseText);
             alert('チェックインに失敗しました : ' + this.responseText);
             checkinButton.touchEnabled = true;
+            checkinButton.touchEnabled = true;
             $.indicator_dialog.hide();
         }
     );
@@ -54,6 +55,7 @@ checkinButton.addEventListener('click', function(){
     
     // 多重投稿防止
     $.checkindialog.touchEnabled = false;
+    checkinButton.touchEnabled = false;
 });
 $.checkindialog.rightNavButton = checkinButton;
 
