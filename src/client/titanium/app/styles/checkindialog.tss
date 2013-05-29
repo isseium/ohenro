@@ -27,7 +27,7 @@
   style: "Ti.UI.iPhone.ActivityIndicatorStyle.PLAIN",
 },
 "#indicator_dialog": {
-  width: "80%",
+  width: "90%",
   height: "30%",
   borderRadius: 10,
   visible: false,
