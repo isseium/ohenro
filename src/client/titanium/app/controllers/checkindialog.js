@@ -42,6 +42,7 @@ var checkinSpot = function(){
             alert('チェックインに失敗しました : ' + this.responseText);
             checkinButton.touchEnabled = true;
             checkinButton.touchEnabled = true;
+            $.checkindialog.rightNavButton = checkinButton;
             $.indicator_dialog.hide();
         }
     );
@@ -54,9 +55,8 @@ checkinButton.addEventListener('click', function(){
     $.indicator.show();
     
     // 多重投稿防止
-    $.checkindialog.touchEnabled = false;
+    $.checkindialog.rightNavButton = undefined;
     $.checkindialog.rightNavButton.touchEnabled = false;
-    
 });
 $.checkindialog.rightNavButton = checkinButton;
 
