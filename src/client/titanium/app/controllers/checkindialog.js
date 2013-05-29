@@ -55,7 +55,8 @@ checkinButton.addEventListener('click', function(){
     
     // 多重投稿防止
     $.checkindialog.touchEnabled = false;
-    checkinButton.touchEnabled = false;
+    $.checkindialog.rightNavButton.touchEnabled = false;
+    
 });
 $.checkindialog.rightNavButton = checkinButton;
 
